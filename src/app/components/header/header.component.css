@@ -1,0 +1,30 @@
+.header {
+	width: 100%;
+	height: 100px;
+	background-color: #8ee4af; /* Minty color */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 20px;
+}
+
+.logo img {
+	height: 80px; /* Adjust height as needed */
+}
+
+.nav-links ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+}
+
+.nav-links li {
+	margin-left: 20px; /* Adjust spacing between links as needed */
+}
+
+.nav-links a {
+	text-decoration: none;
+	color: #333; /* Link color */
+	font-weight: bold;
+}
