@@ -1,91 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Board, Note, Workspace } from './models/board.model';
 import { identifierName } from '@angular/compiler';
+import { WorkspaceService } from './services/workspace.service';
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-	boards: Board[];
-	boardsAlt!: Board[];
-	note1: Note;
-	note2: Note;
-	workspace1: Workspace;
-	workspace2: Workspace;
+export class AppComponent implements OnInit {
 	workspaces!: Workspace[];
 	currentWorkspace!: Workspace;
-	constructor() {
-		this.note1 = {
-			id: 1,
-			description: 'desc1',
-			colour: 'blue',
-			created: 'today',
-			reminder: 'tommorrow',
-		};
-		this.note2 = {
-			id: 2,
-			description: 'desc2',
-			colour: 'red',
-			created: 'today',
-			reminder: 'tommorrow',
-		};
-		this.boards = [
-			{
-				id: 2,
-				title: 'board02',
-				colour: 'blue',
-				arrayOfNotes: [this.note1, this.note2],
-			},
-			{
-				id: 1,
-				title: 'board01',
-				colour: 'red',
-				arrayOfNotes: [this.note1, this.note1],
-			},
-		];
-		this.boardsAlt = [
-			{
-				id: 4,
-				title: 'board04',
-				colour: 'blue',
-				arrayOfNotes: [this.note1, this.note2],
-			},
-			{
-				id: 1,
-				title: 'board01',
-				colour: 'red',
-				arrayOfNotes: [this.note1, this.note1],
-			},
-			{
-				id: 2,
-				title: 'board02',
-				colour: 'blue',
-				arrayOfNotes: [this.note1, this.note2],
-			},
-			{
-				id: 3,
-				title: 'board03',
-				colour: 'red',
-				arrayOfNotes: [this.note1, this.note1],
-			},
-		];
-		this.workspace1 = {
-			id: 1,
-			title: 'workspace1',
-			arrayOfBoards: this.boards,
-		};
-		this.workspace2 = {
-			id: 2,
-			title: 'workspace2',
-			arrayOfBoards: this.boardsAlt,
-		};
-		this.workspaces = [this.workspace1, this.workspace2];
-		this.currentWorkspace = this.workspaces[0];
-	}
+	constructor(private workspaceSvc: WorkspaceService) {}
 	changeWorkspace(workspace: Workspace) {
 		this.currentWorkspace = workspace;
 		console.log(workspace);
+	}
+	ngOnInit() {
+		this.workspaceSvc.getWorkspaces().subscribe((workspaces) => {
+			console.log('OKAY');
+			this.workspaces = workspaces;
+			this.currentWorkspace = this.workspaces[0];
+			console.log(this.workspaces);
+		});
 	}
 }

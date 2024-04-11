@@ -1,0 +1,140 @@
+[
+	{
+		"id": 1,
+		"title": "workspace1",
+		"arrayOfBoards": [
+			{
+				"id": 1,
+				"title": "board01",
+				"colour": "red",
+				"arrayOfNotes": [
+					{
+						"id": 1,
+						"description": "desc1",
+						"colour": "blue",
+						"created": "today",
+						"reminder": "tomorrow"
+					},
+					{
+						"id": 2,
+						"description": "desc2",
+						"colour": "red",
+						"created": "today",
+						"reminder": "tomorrow"
+					}
+				]
+			},
+			{
+				"id": 2,
+				"title": "board02",
+				"colour": "blue",
+				"arrayOfNotes": [
+					{
+						"id": 3,
+						"description": "desc1",
+						"colour": "blue",
+						"created": "today",
+						"reminder": "tomorrow"
+					},
+					{
+						"id": 4,
+						"description": "desc2",
+						"colour": "red",
+						"created": "today",
+						"reminder": "tomorrow"
+					}
+				]
+			}
+		]
+	},
+	{
+		"id": 2,
+		"title": "workspace2",
+		"arrayOfBoards": [
+			{
+				"id": 3,
+				"title": "board03",
+				"colour": "red",
+				"arrayOfNotes": [
+					{
+						"id": 5,
+						"description": "desc1",
+						"colour": "blue",
+						"created": "today",
+						"reminder": "tomorrow"
+					},
+					{
+						"id": 6,
+						"description": "desc2",
+						"colour": "red",
+						"created": "today",
+						"reminder": "tomorrow"
+					}
+				]
+			},
+			{
+				"id": 4,
+				"title": "board04",
+				"colour": "blue",
+				"arrayOfNotes": [
+					{
+						"id": 7,
+						"description": "desc1",
+						"colour": "blue",
+						"created": "today",
+						"reminder": "tomorrow"
+					},
+					{
+						"id": 8,
+						"description": "desc2",
+						"colour": "red",
+						"created": "today",
+						"reminder": "tomorrow"
+					}
+				]
+			},
+			{
+				"id": 3,
+				"title": "board03",
+				"colour": "red",
+				"arrayOfNotes": [
+					{
+						"id": 5,
+						"description": "desc1",
+						"colour": "blue",
+						"created": "today",
+						"reminder": "tomorrow"
+					},
+					{
+						"id": 6,
+						"description": "desc2",
+						"colour": "red",
+						"created": "today",
+						"reminder": "tomorrow"
+					}
+				]
+			},
+			{
+				"id": 4,
+				"title": "board04",
+				"colour": "blue",
+				"arrayOfNotes": [
+					{
+						"id": 7,
+						"description": "desc1",
+						"colour": "blue",
+						"created": "today",
+						"reminder": "tomorrow"
+					},
+					{
+						"id": 8,
+						"description": "desc2",
+						"colour": "red",
+						"created": "today",
+						"reminder": "tomorrow"
+					}
+				]
+			}
+		]
+	}
+]
