@@ -5,6 +5,9 @@
 		(changeWorkspaceEvent)="changeWorkspace($event)"
 	></app-sidebar>
 	<div class="home">
-		<app-board *ngFor="let board of boards" [board]="board"></app-board>
+		<app-board
+			*ngFor="let board of currentWorkspace.arrayOfBoards"
+			[board]="board"
+		></app-board>
 	</div>
 </div>

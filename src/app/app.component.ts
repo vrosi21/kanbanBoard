@@ -9,6 +9,7 @@ import { identifierName } from '@angular/compiler';
 })
 export class AppComponent {
 	boards: Board[];
+	boardsAlt!: Board[];
 	note1: Note;
 	note2: Note;
 	workspace1: Workspace;
@@ -44,6 +45,32 @@ export class AppComponent {
 				arrayOfNotes: [this.note1, this.note1],
 			},
 		];
+		this.boardsAlt = [
+			{
+				id: 4,
+				title: 'board04',
+				colour: 'blue',
+				arrayOfNotes: [this.note1, this.note2],
+			},
+			{
+				id: 1,
+				title: 'board01',
+				colour: 'red',
+				arrayOfNotes: [this.note1, this.note1],
+			},
+			{
+				id: 2,
+				title: 'board02',
+				colour: 'blue',
+				arrayOfNotes: [this.note1, this.note2],
+			},
+			{
+				id: 3,
+				title: 'board03',
+				colour: 'red',
+				arrayOfNotes: [this.note1, this.note1],
+			},
+		];
 		this.workspace1 = {
 			id: 1,
 			title: 'workspace1',
@@ -52,9 +79,10 @@ export class AppComponent {
 		this.workspace2 = {
 			id: 2,
 			title: 'workspace2',
-			arrayOfBoards: this.boards,
+			arrayOfBoards: this.boardsAlt,
 		};
 		this.workspaces = [this.workspace1, this.workspace2];
+		this.currentWorkspace = this.workspace1;
 	}
 	changeWorkspace(workspace: Workspace) {
 		this.currentWorkspace = workspace;
