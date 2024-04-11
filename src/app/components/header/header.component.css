@@ -1,30 +1,49 @@
-.header {
-	width: 100%;
-	height: 100px;
-	background-color: #8ee4af; /* Minty color */
+/* Add a black background color to the top navigation */
+.topnav {
+	position: relative; /* Ensure a positioning context for absolute positioning */
+	background-color: #333;
+	overflow: hidden;
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 0 20px;
+	justify-content: flex-end;
+	height: calc(100% + 20px); /* Make the topnav 20px taller */
 }
 
-.logo img {
-	height: 80px; /* Adjust height as needed */
-}
-
-.nav-links ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
-}
-
-.nav-links li {
-	margin-left: 20px; /* Adjust spacing between links as needed */
-}
-
-.nav-links a {
-	text-decoration: none;
-	color: #333; /* Link color */
+/* Style the logo */
+.topnav .logo {
+	position: absolute; /* Position the logo absolutely */
+	left: 5px; /* Adjust the left position as needed */
+	top: 50%; /* Align the top of the logo to the middle of the topnav */
+	transform: translateY(-50%); /* Adjust vertical alignment */
 	font-weight: bold;
+	font-size: 42px;
+	color: #bbb; /* Greyish white color */
+	padding: 14px 16px;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+	float: left;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 20px 16px; /* Adjust top and bottom padding to 20px */
+	text-decoration: none;
+	font-size: 20px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+	background-color: #ddd;
+	color: black;
+}
+
+/* Add an active class to highlight the current page */
+.topnav a.active {
+	background-color: #04aa6d;
+	color: white;
+}
+
+/* Hide the link that should open and close the topnav on small screens */
+.topnav .icon {
+	display: none;
 }
