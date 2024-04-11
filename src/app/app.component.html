@@ -2,6 +2,7 @@
 <div class="mainContainer">
 	<app-sidebar
 		[workspaces]="workspaces"
+		[currentWorkspace]="currentWorkspace"
 		(changeWorkspaceEvent)="changeWorkspace($event)"
 	></app-sidebar>
 	<div class="home">

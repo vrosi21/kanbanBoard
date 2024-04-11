@@ -102,3 +102,7 @@ img {
 	max-width: 100%;
 	height: auto;
 }
+/* Custom properties */
+.bold {
+	font-weight: bold;
+}

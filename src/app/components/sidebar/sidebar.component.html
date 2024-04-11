@@ -1,10 +1,11 @@
 <div class="sidebar">
-	<a class="active" href="#home">Home</a>
+	<a href="#home">Home</a>
 	<a
 		href="#news"
 		*ngFor="let workspace of workspaces"
+		[ngClass]="isCurrentWorkspace(workspace)"
 		(click)="changeWorkspace(workspace)"
-		>{{ workspace.title }}</a
+		>{{ workspace?.title }}</a
 	>
 	<a href="#addWorkspace">New Workspace</a>
 </div>

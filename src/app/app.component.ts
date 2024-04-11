@@ -82,7 +82,7 @@ export class AppComponent {
 			arrayOfBoards: this.boardsAlt,
 		};
 		this.workspaces = [this.workspace1, this.workspace2];
-		this.currentWorkspace = this.workspace1;
+		this.currentWorkspace = this.workspaces[0];
 	}
 	changeWorkspace(workspace: Workspace) {
 		this.currentWorkspace = workspace;
