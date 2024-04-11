@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Workspace } from 'src/app/models/board.model';
 
 @Component({
 	selector: 'app-sidebar',
@@ -6,9 +7,11 @@ import { Component } from '@angular/core';
 	styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent {
+	@Input() workspaces!: Workspace[];
+	@Output() changeWorkspaceEvent = new EventEmitter<Workspace>();
 	sidebarOpen: boolean = true;
 
-	toggleSidebar() {
-		this.sidebarOpen = !this.sidebarOpen;
+	changeWorkspace(workspace: Workspace) {
+		this.changeWorkspaceEvent.emit(workspace);
 	}
 }

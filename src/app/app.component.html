@@ -1,7 +1,10 @@
 <app-header></app-header>
 <div class="mainContainer">
-	<app-sidebar></app-sidebar>
+	<app-sidebar
+		[workspaces]="workspaces"
+		(changeWorkspaceEvent)="changeWorkspace($event)"
+	></app-sidebar>
 	<div class="home">
-		<app-board [board]="board01"></app-board>
+		<app-board *ngFor="let board of boards" [board]="board"></app-board>
 	</div>
 </div>

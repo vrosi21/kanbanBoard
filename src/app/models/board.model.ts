@@ -1,3 +1,8 @@
+export interface Workspace {
+	id: number;
+	title: string;
+	arrayOfBoards: Board[];
+}
 export interface Board {
 	id: number;
 	title: string;

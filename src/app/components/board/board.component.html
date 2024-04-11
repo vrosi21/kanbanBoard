@@ -1,4 +1,4 @@
 <div class="board">
 	<div class="title">{{ board.title }}</div>
-	<app-note></app-note>
+	<app-note *ngFor="let note of board.arrayOfNotes" [note]="note"></app-note>
 </div>
