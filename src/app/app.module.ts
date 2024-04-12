@@ -8,6 +8,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { BoardComponent } from './components/board/board.component';
 import { NoteComponent } from './components/note/note.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [
@@ -17,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 		BoardComponent,
 		NoteComponent,
 	],
-	imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+	imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
 	providers: [],
 	bootstrap: [AppComponent],
 })

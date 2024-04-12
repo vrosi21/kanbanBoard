@@ -28,25 +28,38 @@
 	color: white;
 }
 
-/* On screens that are less than 700px wide, make the sidebar into a topbar */
-@media screen and (max-width: 700px) {
-	.sidebar {
-		width: 100%;
-		height: auto;
-		position: relative;
-	}
-	.sidebar a {
-		float: left;
-	}
-	div.content {
-		margin-left: 0;
-	}
+/* Form */
+.sidebar form {
+	padding: 8px;
 }
 
-/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-@media screen and (max-width: 400px) {
-	.sidebar a {
-		text-align: center;
-		float: none;
-	}
+/* Form input */
+.sidebar input[type='text'] {
+	width: 100%;
+	padding: 8px;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+	border: none; /* Remove default border */
+	border-bottom: 2px solid transparent; /* Add transparent bottom border */
+	border-radius: 0; /* Remove border radius */
+	transition: border-color 0.3s; /* Add transition effect */
 }
+.sidebar input[type='text']:focus {
+	border-bottom-color: #04aa6d; /* Change bottom border color on focus */
+}
+
+/* Form button */
+.sidebar button[type='submit'] {
+	background-color: #04aa6d;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+/* Form button on hover */
+.sidebar button[type='submit']:hover {
+	background-color: #055c3e;
+}
+/*------------------------*/

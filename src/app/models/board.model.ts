@@ -1,3 +1,8 @@
+export interface WorkspaceInfo {
+	id: number;
+	title: string;
+}
+
 export interface Workspace {
 	id: number;
 	title: string;

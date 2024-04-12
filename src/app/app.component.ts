@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Board, Note, Workspace } from './models/board.model';
+import { Board, Note, Workspace, WorkspaceInfo } from './models/board.model';
 import { identifierName } from '@angular/compiler';
 import { WorkspaceService } from './services/workspace.service';
 
@@ -11,6 +11,7 @@ import { WorkspaceService } from './services/workspace.service';
 export class AppComponent implements OnInit {
 	workspaces!: Workspace[];
 	currentWorkspace!: Workspace;
+	workspaceInfo!: WorkspaceInfo[];
 	constructor(private workspaceSvc: WorkspaceService) {}
 	changeWorkspace(workspace: Workspace) {
 		this.currentWorkspace = workspace;
@@ -18,10 +19,12 @@ export class AppComponent implements OnInit {
 	}
 	ngOnInit() {
 		this.workspaceSvc.getWorkspaces().subscribe((workspaces) => {
-			console.log('OKAY');
 			this.workspaces = workspaces;
 			this.currentWorkspace = this.workspaces[0];
-			console.log(this.workspaces);
+			//extract title and id from workspaces
+			this.workspaceInfo = this.workspaceSvc.extractWorkspaceInfo(
+				this.workspaces
+			);
 		});
 	}
 }

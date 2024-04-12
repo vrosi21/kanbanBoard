@@ -6,5 +6,13 @@
 		(click)="changeWorkspace(workspace)"
 		>{{ workspace?.title }}</a
 	>
-	<a href="#addWorkspace">New Workspace</a>
+	<form (submit)="addNewWorkspace()">
+		<input
+			type="text"
+			placeholder="Enter workspace title"
+			[(ngModel)]="newWorkspaceTitle"
+			name="newWorkspaceTitle"
+		/>
+		<button type="submit">Add</button>
+	</form>
 </div>
