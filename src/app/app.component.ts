@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
 			console.error('Workspace not found for id:', workspaceId);
 		}
 	}
+	addBoard() {}
 
 	ngOnInit() {
 		this.workspaceSvc.getWorkspaces().subscribe((workspaces) => {

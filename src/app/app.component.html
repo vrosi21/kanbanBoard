@@ -11,5 +11,8 @@
 			*ngFor="let board of currentWorkspace?.arrayOfBoards || []"
 			[board]="board"
 		></app-board>
+		<div class="add-board" (click)="addBoard()">
+			<span class="plus">+</span>
+		</div>
 	</div>
 </div>

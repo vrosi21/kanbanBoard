@@ -10,6 +10,7 @@
 
 /* Style the logo */
 .topnav .logo {
+	cursor: default;
 	position: absolute; /* Position the logo absolutely */
 	left: 5px; /* Adjust the left position as needed */
 	top: 50%; /* Align the top of the logo to the middle of the topnav */
