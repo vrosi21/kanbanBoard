@@ -35,5 +35,14 @@ export class AppComponent implements OnInit {
 			this.currentWorkspaceId = this.currentWorkspace.id;
 			this.workspaceInfo = this.workspaceSvc.extractWorkspaceInfo(workspaces);
 		});
+
+		// Subscribe to the event emitted when a new workspace is created
+		this.workspaceSvc.newWorkspaceCreated.subscribe(
+			(newWorkspace: Workspace) => {
+				this.workspaces.push(newWorkspace); // Add new workspace to the list
+				this.currentWorkspace = newWorkspace; // Set new workspace as the current workspace
+				this.currentWorkspaceId = newWorkspace.id;
+			}
+		);
 	}
 }

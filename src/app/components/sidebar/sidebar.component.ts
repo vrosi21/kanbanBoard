@@ -54,5 +54,15 @@ export class SidebarComponent implements OnInit {
 			return '';
 		}
 	}
-	ngOnInit() {}
+	ngOnInit() {
+		// Subscribe to the event emitted when a new workspace is created
+		this.workspaceSvc.newWorkspaceCreated.subscribe(
+			(newWorkspace: Workspace) => {
+				this.workspaceInfo.push({
+					id: newWorkspace.id,
+					title: newWorkspace.title,
+				});
+			}
+		);
+	}
 }
