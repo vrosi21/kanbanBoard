@@ -1,8 +1,8 @@
 <app-header></app-header>
 <div class="mainContainer">
 	<app-sidebar
-		[workspaces]="workspaces"
-		[currentWorkspace]="currentWorkspace"
+		[workspaceInfo]="workspaceInfo"
+		[currentWorkspaceId]="currentWorkspaceId"
 		(changeWorkspaceEvent)="changeWorkspace($event)"
 	></app-sidebar>
 	<div class="home">

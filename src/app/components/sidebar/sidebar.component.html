@@ -1,9 +1,9 @@
 <div class="sidebar">
 	<a
 		href="#news"
-		*ngFor="let workspace of workspaces"
-		[ngClass]="isCurrentWorkspace(workspace)"
-		(click)="changeWorkspace(workspace)"
+		*ngFor="let workspace of workspaceInfo"
+		[ngClass]="isCurrentWorkspace(workspace.id)"
+		(click)="changeWorkspace(workspace.id)"
 		>{{ workspace?.title }}</a
 	>
 	<form (submit)="addNewWorkspace()">
@@ -12,7 +12,12 @@
 			placeholder="Enter workspace title"
 			[(ngModel)]="newWorkspaceTitle"
 			name="newWorkspaceTitle"
+			[ngClass]="{ error: hasError }"
+			(focus)="onInputFocus()"
 		/>
+		<div class="error-message" *ngIf="hasError">
+			Please enter a workspace title!
+		</div>
 		<button type="submit">Add</button>
 	</form>
 </div>

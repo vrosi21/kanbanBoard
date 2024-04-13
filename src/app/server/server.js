@@ -23,10 +23,19 @@ app.get('/api/workspaces', (req, res) => {
 	res.json(workspaces);
 });
 
+// GET request to fetch the next available workspace id
+let nextWorkspaceId = workspaces.length + 1; // Initialize with the next id
+app.get('/api/workspaces/nextId', (req, res) => {
+	res.json({ id: nextWorkspaceId });
+	nextWorkspaceId++; // Increment the next id for the next workspace
+});
+
 // POST request to create a new workspace
 app.post('/api/workspaces', (req, res) => {
 	const newWorkspace = req.body;
+	newWorkspace.id = nextWorkspaceId; // Assign the next available id to the new workspace
 	workspaces.push(newWorkspace);
+	nextWorkspaceId++; // Increment the next id for the next workspace
 	// Assuming you want to send back the updated list of workspaces
 	res.json(workspaces);
 });

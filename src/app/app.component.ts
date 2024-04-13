@@ -11,20 +11,29 @@ import { WorkspaceService } from './services/workspace.service';
 export class AppComponent implements OnInit {
 	workspaces!: Workspace[];
 	currentWorkspace!: Workspace;
-	workspaceInfo!: WorkspaceInfo[];
+	currentWorkspaceId!: string;
+	workspaceInfo: WorkspaceInfo[] = []; // Explicitly typed as an array of WorkspaceInfo
+
 	constructor(private workspaceSvc: WorkspaceService) {}
-	changeWorkspace(workspace: Workspace) {
-		this.currentWorkspace = workspace;
-		console.log(workspace);
+
+	changeWorkspace(workspaceId: string) {
+		const foundWorkspace = this.workspaces.find(
+			(workspace: Workspace) => workspace.id === workspaceId
+		);
+		if (foundWorkspace) {
+			this.currentWorkspace = foundWorkspace;
+			console.log(this.currentWorkspace);
+		} else {
+			console.error('Workspace not found for id:', workspaceId);
+		}
 	}
+
 	ngOnInit() {
 		this.workspaceSvc.getWorkspaces().subscribe((workspaces) => {
 			this.workspaces = workspaces;
 			this.currentWorkspace = this.workspaces[0];
-			//extract title and id from workspaces
-			this.workspaceInfo = this.workspaceSvc.extractWorkspaceInfo(
-				this.workspaces
-			);
+			this.currentWorkspaceId = this.currentWorkspace.id;
+			this.workspaceInfo = this.workspaceSvc.extractWorkspaceInfo(workspaces);
 		});
 	}
 }

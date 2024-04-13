@@ -48,6 +48,17 @@
 	border-bottom-color: #04aa6d; /* Change bottom border color on focus */
 }
 
+.error-message {
+	font-size: 12px;
+	color: red;
+	font-weight: bold;
+	padding-left: 3px;
+	padding-bottom: 5px;
+}
+.error {
+	border-bottom-color: red !important;
+}
+
 /* Form button */
 .sidebar button[type='submit'] {
 	background-color: #04aa6d;

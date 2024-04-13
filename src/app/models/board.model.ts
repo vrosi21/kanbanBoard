@@ -1,21 +1,21 @@
 export interface WorkspaceInfo {
-	id: number;
+	id: string;
 	title: string;
 }
 
 export interface Workspace {
-	id: number;
+	id: string;
 	title: string;
 	arrayOfBoards: Board[];
 }
 export interface Board {
-	id: number;
+	id: string;
 	title: string;
 	colour: string;
 	arrayOfNotes: Note[];
 }
 export interface Note {
-	id: number;
+	id: string;
 	description: string;
 	colour: string;
 	created: string;
