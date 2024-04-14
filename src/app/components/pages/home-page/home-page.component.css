@@ -1,5 +1,69 @@
-.container {
+.home-container {
+	text-align: center;
+	padding-top: 100px;
+}
+
+.row {
 	display: flex;
-	flex-direction: column;
-	min-height: calc(100vh - 300px);
+	justify-content: space-between;
+}
+
+.col {
+	flex: 1;
+}
+
+.logo {
+	font-family: 'Arial', sans-serif;
+	font-size: 36px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	color: #bbb; /* Greyish white color */
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.slogan {
+	font-family: 'Arial', sans-serif;
+	font-size: 24px;
+	margin-bottom: 20px;
+}
+
+.slogan span {
+	font-weight: normal;
+}
+
+.login-form {
+	width: 300px;
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+label {
+	display: block;
+}
+
+input[type='email'],
+input[type='password'] {
+	width: 100%;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+}
+
+button {
+	width: 100%;
+	padding: 10px 20px;
+	background-color: #04aa6d; /* Adjusted color to match provided styles */
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #055c3e; /* Adjusted hover color to match provided styles */
 }
