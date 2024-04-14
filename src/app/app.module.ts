@@ -9,6 +9,11 @@ import { BoardComponent } from './components/board/board.component';
 import { NoteComponent } from './components/note/note.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { HomePageComponent } from './components/pages/home-page/home-page.component';
+import { AboutPageComponent } from './components/pages/about-page/about-page.component';
+import { KanbanPageComponent } from './components/pages/kanban-page/kanban-page.component';
+import { RegisterPageComponent } from './components/pages/register-page/register-page.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
 	declarations: [
@@ -17,6 +22,11 @@ import { FormsModule } from '@angular/forms';
 		SidebarComponent,
 		BoardComponent,
 		NoteComponent,
+		HomePageComponent,
+		AboutPageComponent,
+		KanbanPageComponent,
+  RegisterPageComponent,
+  FooterComponent,
 	],
 	imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
 	providers: [],

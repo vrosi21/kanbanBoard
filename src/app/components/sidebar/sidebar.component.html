@@ -1,6 +1,5 @@
 <div class="sidebar">
 	<a
-		href="#news"
 		*ngFor="let workspace of workspaceInfo"
 		[ngClass]="isCurrentWorkspace(workspace.id)"
 		(click)="changeWorkspace(workspace.id)"

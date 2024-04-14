@@ -10,6 +10,7 @@
 
 /* Sidebar links */
 .sidebar a {
+	cursor: pointer;
 	display: block;
 	color: black;
 	padding: 16px;
@@ -35,6 +36,7 @@
 
 /* Form input */
 .sidebar input[type='text'] {
+	color: #333;
 	width: 100%;
 	padding: 8px;
 	margin-bottom: 10px;

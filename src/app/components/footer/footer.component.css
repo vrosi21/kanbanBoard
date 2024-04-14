@@ -1,0 +1,83 @@
+.container {
+	max-width: 1170px;
+	margin: auto;
+	padding: 32px;
+}
+
+.footer {
+	background-color: #333;
+	color: #eee; /* Greyish white text color */
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end; /* Align at the bottom */
+	min-height: 100%; /* Ensure the footer covers the entire viewport height */
+}
+
+.footer-content {
+	flex-grow: 1;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.footer-section {
+	flex: 1;
+	margin-right: 20px;
+}
+
+.footer-section h2 {
+	padding-bottom: 10px;
+}
+
+.footer-section ul {
+	list-style: none;
+	padding: 0;
+}
+
+.footer-section ul li {
+	margin-bottom: 10px;
+}
+
+.footer-section a {
+	color: #eee;
+}
+
+.contact-input {
+	width: 100%;
+	margin-bottom: 10px;
+	padding: 8px;
+}
+
+.btn {
+	display: inline-block;
+	background-color: #04aa6d;
+	color: #fff;
+	padding: 8px 16px;
+	border: none;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.btn-primary {
+	background-color: #04aa6d;
+}
+
+.footer-bottom {
+	text-align: center;
+	padding: 20px 0; /* Add padding to the bottom to separate from content */
+}
+.divider {
+	align-self: center;
+	height: 150px;
+	width: 1px; /* Width of the divider */
+	background-color: #eee; /* Greyish white color */
+	margin: 0 20px; /* Adjust margin to control spacing */
+}
+h2 {
+	font-weight: bold;
+	cursor: default;
+	margin-bottom: 16px;
+}
+p {
+	cursor: default;
+}
