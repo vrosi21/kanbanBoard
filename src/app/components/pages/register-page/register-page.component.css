@@ -1,5 +1,66 @@
-.container {
+.register-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 128px 20px;
+}
+
+.login-form,
+.register-form {
+	background-color: #eeeeee;
+	color: black;
+	padding: 32px 20px;
+	flex: 1;
+	max-width: calc(50% - 20px);
+	margin: 0 20px;
+	text-align: center;
+}
+
+.login-form h2,
+.register-form h2 {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.login-form form,
+.register-form form {
+	height: 320px;
+	padding: 64px 32px;
 	display: flex;
 	flex-direction: column;
-	min-height: calc(100vh - 300px);
+	align-items: center;
+}
+
+.login-form input,
+.register-form input,
+.login-form button,
+.register-form button {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 20px;
+	box-sizing: border-box;
+	border: none;
+	border-bottom: 2px solid transparent;
+	transition: border-color 0.3s;
+}
+
+.login-form input:focus,
+.register-form input:focus {
+	border-bottom-color: #04aa6d;
+}
+
+.login-form button,
+.register-form button {
+	background-color: #04aa6d;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.login-form button:hover,
+.register-form button:hover {
+	background-color: #055c3e;
 }

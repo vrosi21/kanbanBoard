@@ -3,7 +3,10 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 64px 20px;
+	padding-top: 128px;
+	padding-left: 32px;
+	padding-right: 32px;
+	padding-bottom: 64px;
 }
 
 .logoNSlogan {
