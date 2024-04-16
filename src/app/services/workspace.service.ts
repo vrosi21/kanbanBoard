@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Workspace, WorkspaceInfo } from '../models/board.model';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 import { NewWorkspaceTemplateService } from './new-workspace-template.service';
 
@@ -12,11 +12,17 @@ const apiUrl: string = 'http://localhost:8081/api/workspaces';
 })
 export class WorkspaceService {
 	newWorkspaceCreated = new EventEmitter<Workspace>();
+  fetchDataSubject: Subject<void> = new Subject<void>();
 
 	constructor(
 		private http: HttpClient,
 		private workspaceTemplateSvc: NewWorkspaceTemplateService
 	) {}
+
+	deleteWorkspace(workspaceId: string): Observable<any> {
+		const url = `${apiUrl}/${workspaceId}`; // Construct the URL with the workspace ID
+		return this.http.delete<any>(url); // Send DELETE request and return Observable
+	}
 
 	generateUniqueId(): string {
 		return uuidv4();
@@ -49,5 +55,9 @@ export class WorkspaceService {
 				// Perform additional error handling here, such as displaying an error message to the user
 			}
 		);
+	}
+	fetchData() {
+		// Perform any additional logic if needed
+		this.fetchDataSubject.next();
 	}
 }

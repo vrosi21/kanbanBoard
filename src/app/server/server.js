@@ -38,6 +38,33 @@ app.post('/api/workspaces', (req, res) => {
 	res.json(workspaces);
 });
 
+// DELETE request to delete a workspace by ID
+app.delete('/api/workspaces/:id', (req, res) => {
+	const workspaceId = req.params.id; // Extract workspace ID from request parameters
+
+	// Find index of workspace in the workspaces array
+	const workspaceIndex = workspaces.findIndex(
+		(workspace) => workspace.id === workspaceId
+	);
+
+	if (workspaceIndex !== -1) {
+		// Remove workspace from array
+		const deletedWorkspace = workspaces.splice(workspaceIndex, 1)[0];
+		res.json({
+			success: true,
+			message: `Workspace with ID ${workspaceId} deleted successfully.`,
+		});
+	} else {
+		// Workspace not found, send 404 response
+		res
+			.status(404)
+			.json({
+				success: false,
+				message: `Workspace with ID ${workspaceId} not found.`,
+			});
+	}
+});
+
 app.listen(PORT, () => {
 	console.log(`Server running on port ${PORT}`);
 });

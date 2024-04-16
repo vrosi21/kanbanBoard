@@ -3,10 +3,11 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding-top: 128px;
-	padding-left: 32px;
-	padding-right: 32px;
-	padding-bottom: 64px;
+	--padding-top: 5%;
+	padding-top: calc(var(--padding-top) + 64px);
+	padding-bottom: 5%;
+	padding-left: 10%;
+	padding-right: 10%;
 }
 
 .logoNSlogan {
@@ -103,7 +104,7 @@
 	align-items: flex-start;
 	color: #f1f1f1;
 	padding: 64px 20px;
-	margin-bottom: 50px;
+	padding: 5% 10%;
 }
 
 .whatIsKanban,
@@ -141,7 +142,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	padding: 64px 20px; /* Added padding */
+	padding: 5% 10%; /* Added padding */
 }
 .feature,
 .testimonial,

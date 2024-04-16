@@ -35,11 +35,17 @@ export class KanbanPageComponent implements OnInit {
 	addBoard() {}
 
 	ngOnInit() {
+		this.fetchData(); // Call fetchData method on component initialization
+
+		this.workspaceSvc.fetchDataSubject.subscribe(() => {
+			this.fetchData();
+		});
+	}
+
+	fetchData() {
 		this.workspaceSvc.getWorkspaces().subscribe((workspaces) => {
 			this.workspaces = workspaces;
 			this.currentWorkspace = this.workspaces[0];
-			console.log('RESET');
-
 			this.currentWorkspaceId = this.currentWorkspace.id;
 			this.workspaceInfo = this.workspaceSvc.extractWorkspaceInfo(workspaces);
 		});
@@ -47,8 +53,8 @@ export class KanbanPageComponent implements OnInit {
 		// Subscribe to the event emitted when a new workspace is created
 		this.workspaceSvc.newWorkspaceCreated.subscribe(
 			(newWorkspace: Workspace) => {
-				this.workspaces.push(newWorkspace); // Add new workspace to the list
-				this.currentWorkspace = newWorkspace; // Set new workspace as the current workspace
+				this.workspaces.push(newWorkspace);
+				this.currentWorkspace = newWorkspace;
 				this.currentWorkspaceId = newWorkspace.id;
 			}
 		);

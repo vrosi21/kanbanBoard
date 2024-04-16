@@ -10,6 +10,7 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { Workspace, WorkspaceInfo } from 'src/app/models/board.model';
 import { WorkspaceService } from 'src/app/services/workspace.service';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router'; // Import Router
 @Component({
 	selector: 'app-sidebar',
 	templateUrl: './sidebar.component.html',
@@ -24,18 +25,27 @@ export class SidebarComponent implements OnInit {
 
 	newWorkspaceTitle: string = '';
 
-	constructor(private workspaceSvc: WorkspaceService) {}
+	constructor(private workspaceSvc: WorkspaceService, private router: Router) {}
 
 	deleteWorkspace(workspaceId: string) {
-		const workspace = this.workspaceInfo.find(
-			(workspace) => workspace.id === workspaceId
+		this.workspaceSvc.deleteWorkspace(workspaceId).subscribe(
+			() => {
+				console.log(`Workspace with ID ${workspaceId} deleted successfully.`);
+				// Remove the deleted workspace from the workspaceInfo array
+				if (workspaceId === this.currentWorkspaceId) {
+					this.workspaceSvc.fetchData();
+					this.currentWorkspaceId = this.workspaceInfo[0].id;
+				}
+
+				this.workspaceInfo = this.workspaceInfo.filter(
+					(workspace) => workspace.id !== workspaceId
+				);
+			},
+			(error) => {
+				console.error('Error deleting workspace:', error);
+				// Handle error
+			}
 		);
-		if (workspace) {
-			console.log(workspace.title);
-			// Perform deletion logic here
-		} else {
-			console.log(`Workspace with ID ${workspaceId} not found.`);
-		}
 	}
 
 	addNewWorkspace() {
