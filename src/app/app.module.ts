@@ -14,7 +14,7 @@ import { AboutPageComponent } from './components/pages/about-page/about-page.com
 import { KanbanPageComponent } from './components/pages/kanban-page/kanban-page.component';
 import { RegisterPageComponent } from './components/pages/register-page/register-page.component';
 import { FooterComponent } from './components/footer/footer.component';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -25,10 +25,16 @@ import { FooterComponent } from './components/footer/footer.component';
 		HomePageComponent,
 		AboutPageComponent,
 		KanbanPageComponent,
-  RegisterPageComponent,
-  FooterComponent,
+		RegisterPageComponent,
+		FooterComponent,
 	],
-	imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		HttpClientModule,
+		FormsModule,
+		FontAwesomeModule,
+	],
 	providers: [],
 	bootstrap: [AppComponent],
 })

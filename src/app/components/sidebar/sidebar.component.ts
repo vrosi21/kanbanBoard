@@ -9,6 +9,7 @@ import {
 import { FormsModule, NgModel } from '@angular/forms';
 import { Workspace, WorkspaceInfo } from 'src/app/models/board.model';
 import { WorkspaceService } from 'src/app/services/workspace.service';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 @Component({
 	selector: 'app-sidebar',
 	templateUrl: './sidebar.component.html',
@@ -19,10 +20,23 @@ export class SidebarComponent implements OnInit {
 	@Input() currentWorkspaceId!: string;
 	@Output() changeWorkspaceEvent = new EventEmitter<string>();
 	hasError: boolean = false;
+	faTrashAlt = faTrashAlt;
 
 	newWorkspaceTitle: string = '';
 
 	constructor(private workspaceSvc: WorkspaceService) {}
+
+	deleteWorkspace(workspaceId: string) {
+		const workspace = this.workspaceInfo.find(
+			(workspace) => workspace.id === workspaceId
+		);
+		if (workspace) {
+			console.log(workspace.title);
+			// Perform deletion logic here
+		} else {
+			console.log(`Workspace with ID ${workspaceId} not found.`);
+		}
+	}
 
 	addNewWorkspace() {
 		if (this.newWorkspaceTitle.trim() !== '') {

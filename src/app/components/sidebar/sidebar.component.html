@@ -3,8 +3,12 @@
 		*ngFor="let workspace of workspaceInfo"
 		[ngClass]="isCurrentWorkspace(workspace.id)"
 		(click)="changeWorkspace(workspace.id)"
-		>{{ workspace?.title }}</a
-	>
+		>{{ workspace?.title }}
+		<fa-icon
+			[icon]="faTrashAlt"
+			(click)="deleteWorkspace(workspace.id); $event.stopPropagation()"
+		></fa-icon>
+	</a>
 	<form (submit)="addNewWorkspace()">
 		<input
 			type="text"
