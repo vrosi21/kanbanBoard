@@ -56,12 +56,10 @@ app.delete('/api/workspaces/:id', (req, res) => {
 		});
 	} else {
 		// Workspace not found, send 404 response
-		res
-			.status(404)
-			.json({
-				success: false,
-				message: `Workspace with ID ${workspaceId} not found.`,
-			});
+		res.status(404).json({
+			success: false,
+			message: `Workspace with ID ${workspaceId} not found.`,
+		});
 	}
 });
 
