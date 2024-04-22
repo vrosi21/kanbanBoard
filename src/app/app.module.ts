@@ -15,27 +15,29 @@ import { KanbanPageComponent } from './components/pages/kanban-page/kanban-page.
 import { RegisterPageComponent } from './components/pages/register-page/register-page.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LoginPageComponent } from './components/pages/login-page/login-page.component';
 @NgModule({
-	declarations: [
-		AppComponent,
-		HeaderComponent,
-		SidebarComponent,
-		BoardComponent,
-		NoteComponent,
-		HomePageComponent,
-		AboutPageComponent,
-		KanbanPageComponent,
-		RegisterPageComponent,
-		FooterComponent,
-	],
-	imports: [
-		BrowserModule,
-		AppRoutingModule,
-		HttpClientModule,
-		FormsModule,
-		FontAwesomeModule,
-	],
-	providers: [],
-	bootstrap: [AppComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    SidebarComponent,
+    BoardComponent,
+    NoteComponent,
+    HomePageComponent,
+    AboutPageComponent,
+    KanbanPageComponent,
+    RegisterPageComponent,
+    FooterComponent,
+    LoginPageComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    FontAwesomeModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
