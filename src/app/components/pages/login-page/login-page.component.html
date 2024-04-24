@@ -2,9 +2,16 @@
   <div class="login-form">
     <h2>Login</h2>
     <form>
-      <input type="text" placeholder="Username" />
-      <input type="password" placeholder="Password" />
-      <button type="submit" class="btn btn-primary">Login</button>
+      <input [(ngModel)]="email" name="email" type="text" placeholder="Email" />
+      <input
+        [(ngModel)]="password"
+        name="password"
+        type="password"
+        placeholder="Password"
+      />
+      <button (click)="submitLoginData()" type="button" class="btn btn-primary">
+        Login
+      </button>
     </form>
   </div>
 </div>

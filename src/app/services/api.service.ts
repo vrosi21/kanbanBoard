@@ -1,14 +1,16 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
+interface RegisterData {
+  email: string;
+  password: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
   constructor(private http: HttpClient) {}
-
-  getMessages(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:3000/posts');
-  }
 }

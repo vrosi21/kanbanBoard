@@ -9,9 +9,8 @@ import { ApiService } from './services/api.service';
 })
 export class AppComponent implements OnInit {
   isNotKanbanRoute: boolean = false;
-  messages: any[] = []; // Declare messages as an array
 
-  constructor(private router: Router, private apiSvc: ApiService) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
@@ -21,8 +20,5 @@ export class AppComponent implements OnInit {
     });
 
     // Subscribe to the Observable returned by getMessages()
-    this.apiSvc.getMessages().subscribe((data) => {
-      this.messages = data; // Assign the received data to messages
-    });
   }
 }

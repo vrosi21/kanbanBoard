@@ -2,10 +2,21 @@
   <div class="register-form">
     <h2>Register</h2>
     <form>
-      <input type="text" placeholder="Username" />
-      <input type="email" placeholder="Email" />
-      <input type="password" placeholder="Password" />
-      <button type="submit" class="btn btn-primary">Register</button>
+      <input [(ngModel)]="username" name="username" placeholder="Username" />
+      <input [(ngModel)]="email" name="email" placeholder="Email" />
+      <input
+        [(ngModel)]="password"
+        name="password"
+        type="password"
+        placeholder="Password"
+      />
+      <input
+        [(ngModel)]="rePassword"
+        name="rePassword"
+        type="password"
+        placeholder="Confirm Password"
+      />
+      <button (click)="submitRegisterData()">Register</button>
     </form>
   </div>
 </div>
