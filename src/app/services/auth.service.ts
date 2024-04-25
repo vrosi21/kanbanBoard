@@ -11,6 +11,18 @@ export class AuthService {
   path: string = 'http://localhost:3000/auth';
   constructor(private http: HttpClient) {}
 
+  get token() {
+    return localStorage.getItem('token');
+  }
+
+  get isAuthenticated() {
+    return !!localStorage.getItem('token');
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+  }
+
   loginUser(loginData: LoginData): Observable<any> {
     return this.http.post(this.path + '/login', loginData).pipe(
       catchError((error) => {

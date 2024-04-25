@@ -3,6 +3,17 @@
   <a routerLink="/home" routerLinkActive="active">Home</a>
   <a routerLink="/kanban" routerLinkActive="active">My Kanban</a>
   <a routerLink="/about" routerLinkActive="active">About</a>
-  <a routerLink="/login" routerLinkActive="active">Log In</a>
-  <a routerLink="/register" routerLinkActive="active">Sign Up</a>
+  <a
+    *ngIf="!authSvc.isAuthenticated"
+    routerLink="/login"
+    routerLinkActive="active"
+    >Log In</a
+  >
+  <a
+    *ngIf="!authSvc.isAuthenticated"
+    routerLink="/register"
+    routerLinkActive="active"
+    >Sign Up</a
+  >
+  <a *ngIf="authSvc.isAuthenticated" (click)="authSvc.logout()">Logout</a>
 </div>

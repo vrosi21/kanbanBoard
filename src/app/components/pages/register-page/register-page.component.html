@@ -1,5 +1,5 @@
 <div class="register-container">
-  <div class="register-form">
+  <div *ngIf="!authSvc.isAuthenticated" class="register-form">
     <h2>Register</h2>
     <form>
       <input [(ngModel)]="username" name="username" placeholder="Username" />
@@ -18,5 +18,8 @@
       />
       <button (click)="submitRegisterData()">Register</button>
     </form>
+  </div>
+  <div *ngIf="authSvc.isAuthenticated" class="errMsg">
+    You are already logged in!
   </div>
 </div>

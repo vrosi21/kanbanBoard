@@ -55,3 +55,11 @@
 .login-form button:hover {
   background-color: #055c3e;
 }
+
+.errMsg {
+  padding: 48px 48px;
+  font-size: 36px;
+  font-weight: bold;
+  background-color: #eeeeee;
+  color: #ed4337;
+}

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class LoginPageComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private authSvc: AuthService) {}
+  constructor(public authSvc: AuthService, private router: Router) {}
 
   submitLoginData() {
     const loginData = {
@@ -24,14 +25,14 @@ export class LoginPageComponent {
       (res) => {
         console.log('Login successful:', res);
         localStorage.setItem('token', res.token);
+        this.router.navigate(['/kanban']);
       },
       (error) => {
         console.error('Error occurred during login:', error);
-        // Optionally, handle error response here, such as displaying an error message to the user
+        //TODO: Add error handling!
       }
     );
 
-    // Reset form fields after submission
     this.email = '';
     this.password = '';
   }
