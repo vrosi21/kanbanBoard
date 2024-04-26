@@ -24,7 +24,7 @@ const routes: Routes = [
     component: RegisterPageComponent,
     title: 'Register - kanbanly',
   },
-  { path: '', redirectTo: '/kanban', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({

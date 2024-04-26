@@ -1,17 +1,21 @@
-<div class="mainContainer">
-	<app-sidebar
-		[workspaceInfo]="workspaceInfo"
-		[currentWorkspaceId]="currentWorkspaceId"
-		(changeWorkspaceEvent)="changeWorkspace($event)"
-	></app-sidebar>
-	<div class="home">
-		<!-- Use safe navigation operator to guard against accessing properties on potentially undefined objects -->
-		<app-board
-			*ngFor="let board of currentWorkspace?.arrayOfBoards || []"
-			[board]="board"
-		></app-board>
-		<div class="add-board" (click)="addBoard()">
-			<span class="plus">+</span>
-		</div>
-	</div>
+<div *ngIf="authSvc.isAuthenticated" class="mainContainer">
+  <app-sidebar
+    [workspaceInfo]="workspaceInfo"
+    [currentWorkspaceId]="currentWorkspaceId"
+    (changeWorkspaceEvent)="changeWorkspace($event)"
+  ></app-sidebar>
+  <div class="home">
+    <!-- Use safe navigation operator to guard against accessing properties on potentially undefined objects -->
+    <app-board
+      *ngFor="let board of currentWorkspace?.arrayOfBoards || []"
+      [board]="board"
+    ></app-board>
+    <div class="add-board" (click)="addBoard()">
+      <span class="plus">+</span>
+    </div>
+  </div>
 </div>
+<div *ngIf="!authSvc.isAuthenticated" class="authErr">
+  <div class="errMsg">Please login/ sign up to use the tool!</div>
+</div>
+<app-footer></app-footer>

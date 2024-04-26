@@ -8,6 +8,8 @@ import {
   WorkspaceInfo,
 } from 'src/app/models/board.model';
 import { ApiService } from 'src/app/services/api.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { ObjectId } from 'mongodb';
 
 @Component({
   selector: 'app-kanban-page',
@@ -17,25 +19,24 @@ import { ApiService } from 'src/app/services/api.service';
 export class KanbanPageComponent implements OnInit {
   workspaces!: Workspace[];
   currentWorkspace!: Workspace;
-  currentWorkspaceId!: string;
-  workspaceInfo: WorkspaceInfo[] = []; // Explicitly typed as an array of WorkspaceInfo
-  userId: string = '6628defd660a1de2da63c428';
+  currentWorkspaceId!: ObjectId;
+  workspaceInfo: WorkspaceInfo[] = [];
 
   constructor(
     private workspaceSvc: WorkspaceService,
-    private apiSvc: ApiService
+    private apiSvc: ApiService,
+    public authSvc: AuthService
   ) {}
 
-  changeWorkspace(workspaceId: string) {
-    // const foundWorkspace = this.workspaces.find(
-    //   (workspace: Workspace) => workspace.id === workspaceId
-    // );
-    // if (foundWorkspace) {
-    //   this.currentWorkspace = foundWorkspace;
-    //   console.log(this.currentWorkspace);
-    // } else {
-    //   console.error('Workspace not found for id:', workspaceId);
-    // }
+  changeWorkspace(wspId: ObjectId) {
+    const foundWorkspace = this.workspaces.find(
+      (workspace: Workspace) => workspace._id === wspId
+    );
+    if (foundWorkspace) {
+      this.currentWorkspace = foundWorkspace;
+    } else {
+      console.error('Workspace not found for id:', wspId);
+    }
   }
   addBoard() {}
 
@@ -48,15 +49,14 @@ export class KanbanPageComponent implements OnInit {
   }
 
   fetchData() {
-    this.apiSvc.getWorkspaces(this.userId).subscribe((workspaces) => {
+    this.apiSvc.getWorkspaces().subscribe((workspaces) => {
       console.log(workspaces);
 
       this.workspaces = workspaces;
 
       this.currentWorkspace = this.workspaces[0];
-      this.currentWorkspaceId = this.currentWorkspace.id;
+      this.currentWorkspaceId = this.currentWorkspace._id;
       this.workspaceInfo = this.workspaceSvc.extractWorkspaceInfo(workspaces);
-      console.log(this.currentWorkspace.id);
     });
 
     // this.workspaceSvc.getWorkspaces().subscribe((workspaces) => {

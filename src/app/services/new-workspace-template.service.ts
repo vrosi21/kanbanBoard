@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { v4 as uuidv4 } from 'uuid';
 import { Workspace } from '../models/board.model';
 
 @Injectable({
@@ -10,7 +9,6 @@ export class NewWorkspaceTemplateService {
 
   generateNewWorkspace(workspaceTitle: string) {
     const newWorkspace = {
-      author: '',
       title: workspaceTitle.trim(),
       arrayOfBoards: [
         {
@@ -36,8 +34,5 @@ export class NewWorkspaceTemplateService {
       ],
     };
     return newWorkspace;
-  }
-  generateUniqueId(): string {
-    return uuidv4();
   }
 }

@@ -26,7 +26,7 @@ export class WorkspaceService {
   }
   extractWorkspaceInfo(workspaces: Workspace[]): WorkspaceInfo[] {
     return workspaces.map((workspace) => ({
-      id: workspace.id,
+      _id: workspace._id,
       title: workspace.title,
     }));
   }

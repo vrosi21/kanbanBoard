@@ -1,26 +1,26 @@
 <div class="sidebar">
-	<a
-		*ngFor="let workspace of workspaceInfo"
-		[ngClass]="isCurrentWorkspace(workspace.id)"
-		(click)="changeWorkspace(workspace.id)"
-		>{{ workspace?.title }}
-		<fa-icon
-			[icon]="faTrashAlt"
-			(click)="deleteWorkspace(workspace.id); $event.stopPropagation()"
-		></fa-icon>
-	</a>
-	<form (submit)="addNewWorkspace()">
-		<input
-			type="text"
-			placeholder="Enter workspace title"
-			[(ngModel)]="newWorkspaceTitle"
-			name="newWorkspaceTitle"
-			[ngClass]="{ error: hasError }"
-			(focus)="onInputFocus()"
-		/>
-		<div class="error-message" *ngIf="hasError">
-			Please enter a workspace title!
-		</div>
-		<button type="submit">Add</button>
-	</form>
+  <a
+    *ngFor="let workspace of workspaceInfo"
+    [ngClass]="isCurrentWorkspace()"
+    (click)="changeWorkspace(workspace._id)"
+    >{{ workspace?.title }}
+    <fa-icon
+      [icon]="faTrashAlt"
+      (click)="deleteWorkspace(); $event.stopPropagation()"
+    ></fa-icon>
+  </a>
+  <form (submit)="addNewWorkspace()">
+    <input
+      type="text"
+      placeholder="Enter workspace title"
+      [(ngModel)]="newWorkspaceTitle"
+      name="newWorkspaceTitle"
+      [ngClass]="{ error: hasError }"
+      (focus)="this.hasError = false"
+    />
+    <div class="error-message" *ngIf="hasError">
+      Please enter a workspace title!
+    </div>
+    <button type="submit">Add</button>
+  </form>
 </div>
