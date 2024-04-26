@@ -1,15 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { identifierName } from '@angular/compiler';
 import { WorkspaceService } from 'src/app/services/workspace.service';
-import {
-  Board,
-  Note,
-  Workspace,
-  WorkspaceInfo,
-} from 'src/app/models/board.model';
-import { ApiService } from 'src/app/services/api.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { Workspace } from 'src/app/models/board.model';
 import { ObjectId } from 'mongodb';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-kanban-page',
@@ -17,62 +10,31 @@ import { ObjectId } from 'mongodb';
   styleUrls: ['./kanban-page.component.css'],
 })
 export class KanbanPageComponent implements OnInit {
-  workspaces!: Workspace[];
   currentWorkspace!: Workspace;
-  currentWorkspaceId!: ObjectId;
-  workspaceInfo: WorkspaceInfo[] = [];
 
   constructor(
     private workspaceSvc: WorkspaceService,
-    private apiSvc: ApiService,
     public authSvc: AuthService
   ) {}
 
   changeWorkspace(wspId: ObjectId) {
-    const foundWorkspace = this.workspaces.find(
-      (workspace: Workspace) => workspace._id === wspId
-    );
-    if (foundWorkspace) {
-      this.currentWorkspace = foundWorkspace;
-    } else {
-      console.error('Workspace not found for id:', wspId);
-    }
+    this.currentWorkspace = this.workspaceSvc.changeWorkspace(wspId);
   }
   addBoard() {}
 
-  ngOnInit() {
-    this.fetchData(); // Call fetchData method on component initialization
+  async ngOnInit() {
+    // Subscribe to the workspaceDeleted event
+    this.workspaceSvc.workspaceDeleted.subscribe(
+      async (currWspId: ObjectId) => {
+        // Update variables or perform any necessary actions
+        // For example, refetch workspaces
+        // await this.workspaceSvc.fetchWorkspaces();
+        this.currentWorkspace = this.workspaceSvc.changeWorkspace(currWspId);
+      }
+    );
 
-    this.workspaceSvc.fetchDataSubject.subscribe(() => {
-      this.fetchData();
-    });
-  }
-
-  fetchData() {
-    this.apiSvc.getWorkspaces().subscribe((workspaces) => {
-      console.log(workspaces);
-
-      this.workspaces = workspaces;
-
-      this.currentWorkspace = this.workspaces[0];
-      this.currentWorkspaceId = this.currentWorkspace._id;
-      this.workspaceInfo = this.workspaceSvc.extractWorkspaceInfo(workspaces);
-    });
-
-    // this.workspaceSvc.getWorkspaces().subscribe((workspaces) => {
-    //   this.workspaces = workspaces;
-    //   this.currentWorkspace = this.workspaces[0];
-    //   this.currentWorkspaceId = this.currentWorkspace.id;
-    //   this.workspaceInfo = this.workspaceSvc.extractWorkspaceInfo(workspaces);
-    // });
-
-    // // Subscribe to the event emitted when a new workspace is created
-    // this.workspaceSvc.newWorkspaceCreated.subscribe(
-    //   (newWorkspace: Workspace) => {
-    //     this.workspaces.push(newWorkspace);
-    //     this.currentWorkspace = newWorkspace;
-    //     this.currentWorkspaceId = newWorkspace.id;
-    //   }
-    // );
+    // Fetch initial workspaces
+    await this.workspaceSvc.fetchWorkspaces();
+    this.currentWorkspace = this.workspaceSvc.currentWsp;
   }
 }

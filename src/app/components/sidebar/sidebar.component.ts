@@ -18,8 +18,8 @@ import { ObjectId } from 'mongodb';
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent implements OnInit {
-  @Input() workspaceInfo!: WorkspaceInfo[];
-  @Input() currentWorkspaceId!: ObjectId;
+  workspaceInfo!: WorkspaceInfo[];
+  currentWorkspaceId!: ObjectId;
   @Output() changeWorkspaceEvent = new EventEmitter<ObjectId>();
   hasError: boolean = false;
   faTrashAlt = faTrashAlt;
@@ -31,28 +31,13 @@ export class SidebarComponent implements OnInit {
   ) {}
 
   deleteWorkspace(wspId: ObjectId) {
-    this.apiSvc.deleteWorkspace(wspId).subscribe(
-      () => {
-        console.log('Workspace with ID ${wspId} deleted successfully.');
-        if (this.currentWorkspaceId === wspId) {
-          this.workspaceSvc.fetchData();
-          this.currentWorkspaceId = this.workspaceInfo[0]._id;
-        }
-        this.workspaceInfo = this.workspaceInfo.filter(
-          (wsp) => wsp._id !== wspId
-        );
-      },
-      (error) => {
-        console.error('Error deleting workspace:', error);
-        //TODO: Handle error.
-      }
-    );
+    this.workspaceSvc.deleteWorkspace(wspId);
   }
 
   addNewWorkspace() {
     if (this.newWorkspaceTitle.trim() !== '') {
       this.hasError = false; // No error
-      this.apiSvc.createNewWorkspace(this.newWorkspaceTitle);
+      this.workspaceSvc.createNewWorkspace(this.newWorkspaceTitle);
       this.newWorkspaceTitle = '';
     } else {
       this.hasError = true; // Input is empty, set error flag
@@ -69,7 +54,25 @@ export class SidebarComponent implements OnInit {
     else return '';
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.workspaceSvc.newWorkspaceAdded.subscribe(
+      async (currWspId: ObjectId) => {
+        await this.workspaceSvc.fetchWorkspaces();
+        this.workspaceInfo = this.workspaceSvc.wspInfo;
+        this.currentWorkspaceId = currWspId;
+        this.changeWorkspace(currWspId);
+      }
+    );
+    this.workspaceSvc.workspaceDeleted.subscribe(
+      async (currWspId: ObjectId) => {
+        // await this.workspaceSvc.fetchWorkspaces();
+        this.workspaceInfo = this.workspaceSvc.wspInfo;
+        this.currentWorkspaceId = currWspId;
+      }
+    );
     this.newWorkspaceTitle = '';
+    await this.workspaceSvc.fetchWorkspaces();
+    this.workspaceInfo = this.workspaceSvc.wspInfo;
+    this.currentWorkspaceId = this.workspaceSvc.currentWspId;
   }
 }
