@@ -1,12 +1,12 @@
 <div class="sidebar">
   <a
     *ngFor="let workspace of workspaceInfo"
-    [ngClass]="isCurrentWorkspace()"
+    [ngClass]="isCurrentWorkspace(workspace._id)"
     (click)="changeWorkspace(workspace._id)"
     >{{ workspace?.title }}
     <fa-icon
       [icon]="faTrashAlt"
-      (click)="deleteWorkspace(); $event.stopPropagation()"
+      (click)="deleteWorkspace(workspace._id); $event.stopPropagation()"
     ></fa-icon>
   </a>
   <form (submit)="addNewWorkspace()">

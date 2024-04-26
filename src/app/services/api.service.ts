@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { NewWorkspaceTemplateService } from './new-workspace-template.service';
+import { ObjectId } from 'mongodb';
+import { WorkspaceService } from './workspace.service';
 
 interface RegisterData {
   email: string;
@@ -17,7 +19,8 @@ export class ApiService {
 
   constructor(
     private http: HttpClient,
-    private workspaceTemplateSvc: NewWorkspaceTemplateService
+    private workspaceTemplateSvc: NewWorkspaceTemplateService,
+    private workspaceSvc: WorkspaceService
   ) {}
 
   createNewWorkspace(wspTitle: string) {
@@ -27,7 +30,7 @@ export class ApiService {
     this.http.post(this.path + '/workspace', newWorkspace).subscribe(
       () => {
         console.log('Added ', newWorkspace.title, ' to DB.');
-        //this.newWorkspaceCreated.emit(newWorkspace); // Emit event when workspace is created successfully
+        this.workspaceSvc.fetchData();
       },
       (error) => {
         console.error('Error adding workspace to DB:', error);
@@ -43,5 +46,12 @@ export class ApiService {
         return throwError('An error occurred while processing your request.');
       })
     );
+  }
+
+  deleteWorkspace(wspId: ObjectId): Observable<any> {
+    const url = this.path + '/workspace/' + wspId;
+    console.log(url);
+
+    return this.http.delete<any>(url);
   }
 }

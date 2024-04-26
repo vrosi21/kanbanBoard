@@ -43,9 +43,9 @@ export class KanbanPageComponent implements OnInit {
   ngOnInit() {
     this.fetchData(); // Call fetchData method on component initialization
 
-    // this.workspaceSvc.fetchDataSubject.subscribe(() => {
-    //   this.fetchData();
-    // });
+    this.workspaceSvc.fetchDataSubject.subscribe(() => {
+      this.fetchData();
+    });
   }
 
   fetchData() {

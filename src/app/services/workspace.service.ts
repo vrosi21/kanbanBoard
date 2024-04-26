@@ -11,7 +11,6 @@ const apiUrl: string = 'http://localhost:8081/api/workspaces';
   providedIn: 'root',
 })
 export class WorkspaceService {
-  newWorkspaceCreated = new EventEmitter<Workspace>();
   fetchDataSubject: Subject<void> = new Subject<void>();
   constructor(
     private http: HttpClient,
@@ -48,7 +47,6 @@ export class WorkspaceService {
     );
   }
   fetchData() {
-    // Perform any additional logic if needed
     this.fetchDataSubject.next();
   }
 }

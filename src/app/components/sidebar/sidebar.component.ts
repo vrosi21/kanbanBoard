@@ -30,26 +30,24 @@ export class SidebarComponent implements OnInit {
     private apiSvc: ApiService
   ) {}
 
-  deleteWorkspace() {}
-  //   this.workspaceSvc.deleteWorkspace(workspaceId).subscribe(
-  //     () => {
-  //       console.log(`Workspace with ID ${workspaceId} deleted successfully.`);
-  //       // Remove the deleted workspace from the workspaceInfo array
-  //       if (workspaceId === this.currentWorkspaceId) {
-  //         this.workspaceSvc.fetchData();
-  //         //this.currentWorkspaceId = this.workspaceInfo[0].id;
-  //       }
-
-  //       // this.workspaceInfo = this.workspaceInfo.filter(
-  //       //   (workspace) => workspace.id !== workspaceId
-  //       // );
-  //     },
-  //     (error) => {
-  //       console.error('Error deleting workspace:', error);
-  //       // Handle error
-  //     }
-  //   );
-  // }
+  deleteWorkspace(wspId: ObjectId) {
+    this.apiSvc.deleteWorkspace(wspId).subscribe(
+      () => {
+        console.log('Workspace with ID ${wspId} deleted successfully.');
+        if (this.currentWorkspaceId === wspId) {
+          this.workspaceSvc.fetchData();
+          this.currentWorkspaceId = this.workspaceInfo[0]._id;
+        }
+        this.workspaceInfo = this.workspaceInfo.filter(
+          (wsp) => wsp._id !== wspId
+        );
+      },
+      (error) => {
+        console.error('Error deleting workspace:', error);
+        //TODO: Handle error.
+      }
+    );
+  }
 
   addNewWorkspace() {
     if (this.newWorkspaceTitle.trim() !== '') {
@@ -66,23 +64,12 @@ export class SidebarComponent implements OnInit {
     this.changeWorkspaceEvent.emit(wspId);
   }
 
-  isCurrentWorkspace() {
-    return '';
-  } //(workspaceId: string): string {
-  //   if (this.currentWorkspaceId === workspaceId) {
-  //     return 'active';
-  //   } else {
-  //     return '';
-  //   }
-  // }
+  isCurrentWorkspace(wspId: ObjectId) {
+    if (this.currentWorkspaceId === wspId) return 'active';
+    else return '';
+  }
+
   ngOnInit() {
     this.newWorkspaceTitle = '';
-    // Subscribe to the event emitted when a new workspace is created
-    this.workspaceSvc.newWorkspaceCreated.subscribe((newWorkspace) => {
-      this.workspaceInfo.push({
-        _id: newWorkspace._id,
-        title: newWorkspace.title,
-      });
-    });
   }
 }
