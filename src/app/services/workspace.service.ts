@@ -1,10 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Workspace, WorkspaceInfo } from '../models/board.model';
-import { Observable, Subject } from 'rxjs';
 import { ObjectId } from 'mongodb';
 import { ApiService } from './api.service';
-
-const apiUrl: string = 'http://localhost:8081/api/workspaces';
 
 @Injectable({
   providedIn: 'root',

@@ -17,6 +17,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginPageComponent } from './components/pages/login-page/login-page.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { RenameModalComponent } from './components/modals/rename-modal/rename-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +31,7 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
     RegisterPageComponent,
     FooterComponent,
     LoginPageComponent,
+    RenameModalComponent,
   ],
   imports: [
     BrowserModule,

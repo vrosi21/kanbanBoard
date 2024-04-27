@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { WorkspaceService } from 'src/app/services/workspace.service';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { ObjectId } from 'mongodb';
 @Component({
   selector: 'app-sidebar',
@@ -10,10 +10,26 @@ import { ObjectId } from 'mongodb';
 export class SidebarComponent implements OnInit {
   @Output() changeWorkspaceEvent = new EventEmitter<ObjectId>();
   hasError: boolean = false;
-  faTrashAlt = faTrashAlt;
+  trashIcon = faTrashAlt;
+  renameIcon = faPencilAlt;
   newWorkspaceTitle: string = '';
+  isOpenRnmMdl: boolean = false;
+  wspRenameTitle?: string;
+  wspRenameId?: ObjectId;
 
   constructor(public workspaceSvc: WorkspaceService) {}
+
+  openModal(wspTitle: string, wspId: ObjectId) {
+    this.isOpenRnmMdl = true;
+    this.wspRenameTitle = wspTitle;
+    this.wspRenameId = wspId;
+  }
+
+  closeModal() {
+    this.isOpenRnmMdl = false;
+    this.wspRenameTitle = undefined;
+    this.wspRenameId = undefined;
+  }
 
   addNewWorkspace() {
     if (this.newWorkspaceTitle.trim() !== '') {
@@ -37,11 +53,6 @@ export class SidebarComponent implements OnInit {
         this.workspaceSvc.changeWorkspace(currWspId);
       }
     );
-    // this.workspaceSvc.workspaceDeleted.subscribe(
-    //   async (currWspId: ObjectId) => {
-    //     // await this.workspaceSvc.fetchWorkspaces();
-    //   }
-    // );
     this.newWorkspaceTitle = '';
     await this.workspaceSvc.fetchWorkspaces();
   }

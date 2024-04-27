@@ -3,13 +3,23 @@
     *ngFor="let workspace of workspaceSvc.workspaceInfo"
     [ngClass]="isCurrentWorkspace(workspace._id)"
     (click)="workspaceSvc.changeWorkspace(workspace._id)"
-    >{{ workspace?.title }}
+  >
+    <span>{{ workspace?.title }}</span>
     <fa-icon
-      [icon]="faTrashAlt"
+      [icon]="renameIcon"
+      type="rename"
+      (click)="
+        openModal(workspace.title, workspace._id); $event.stopPropagation()
+      "
+    ></fa-icon>
+    <fa-icon
+      [icon]="trashIcon"
+      type="delete"
       (click)="
         workspaceSvc.deleteWorkspace(workspace._id); $event.stopPropagation()
       "
-    ></fa-icon>
+    >
+    </fa-icon>
   </a>
   <form (submit)="addNewWorkspace()">
     <input
@@ -26,3 +36,11 @@
     <button type="submit">Add</button>
   </form>
 </div>
+
+<app-rename-modal
+  *ngIf="isOpenRnmMdl"
+  [workspaceTitle]="wspRenameTitle"
+  [workspaceId]="wspRenameId"
+  (closeModal)="closeModal()"
+>
+</app-rename-modal>
