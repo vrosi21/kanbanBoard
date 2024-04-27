@@ -47,3 +47,19 @@
   background-color: #eeeeee;
   color: #ed4337;
 }
+
+.createNewWsp {
+  width: 100%;
+  padding-top: 192px;
+  padding-bottom: 128px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.makeNewMsg {
+  padding: 48px 48px;
+  font-size: 36px;
+  font-weight: bold;
+  background-color: #eeeeee;
+  color: #252422;
+}

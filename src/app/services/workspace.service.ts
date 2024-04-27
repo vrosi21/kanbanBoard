@@ -11,9 +11,10 @@ const apiUrl: string = 'http://localhost:8081/api/workspaces';
 })
 export class WorkspaceService {
   workspaces!: Workspace[];
-  currentWorkspace!: Workspace;
-  currentWorkspaceId!: ObjectId;
+  currentWorkspace?: Workspace;
+  currentWorkspaceId?: ObjectId;
   workspaceInfo!: WorkspaceInfo[];
+  isTableEmpty!: boolean;
 
   constructor(private apiSvc: ApiService) {}
 
@@ -22,16 +23,6 @@ export class WorkspaceService {
       _id: workspace._id,
       title: workspace.title,
     }));
-  }
-  get currentWsp(): Workspace {
-    return this.currentWorkspace;
-  }
-
-  get wspInfo(): WorkspaceInfo[] {
-    return this.workspaceInfo;
-  }
-  get currentWspId(): ObjectId {
-    return this.currentWorkspaceId;
   }
 
   createNewWorkspace(wspTitle: string): void {
@@ -54,16 +45,29 @@ export class WorkspaceService {
   deleteWorkspace(wspId: ObjectId) {
     this.apiSvc.deleteWorkspace(wspId).subscribe(
       () => {
-        if (this.currentWorkspaceId === wspId) {
-          this.workspaces = this.workspaces.filter((wsp) => wsp._id !== wspId);
-          this.currentWorkspace = this.workspaces[0];
-          this.currentWorkspaceId = this.currentWorkspace._id;
+        // Remove the deleted workspace from the workspaces array
+        this.workspaces = this.workspaces.filter((wsp) => wsp._id !== wspId);
+
+        if (this.workspaces.length > 0) {
+          // Update currentWorkspace and currentWorkspaceId if workspaces array is not empty
+          if (this.currentWorkspaceId === wspId) {
+            this.currentWorkspace = this.workspaces[0];
+            this.currentWorkspaceId = this.currentWorkspace._id;
+          }
+
+          // Update workspaceInfo to remove the deleted workspace
+          this.workspaceInfo = this.workspaceInfo.filter(
+            (wsp) => wsp._id !== wspId
+          );
+        } else {
+          this.isTableEmpty = true;
+          // If workspaces array is empty, reset currentWorkspace and currentWorkspaceId
+          this.currentWorkspace = undefined;
+          this.currentWorkspaceId = undefined;
+
+          // Clear workspaceInfo
+          this.workspaceInfo = [];
         }
-        this.workspaceInfo = this.workspaceInfo.filter(
-          (wsp) => wsp._id !== wspId
-        );
-        // Emit an event after deleting workspace
-        this.workspaceDeleted.emit(this.currentWorkspaceId);
       },
       (error) => {
         console.error('Error deleting workspace:', error);
@@ -71,24 +75,27 @@ export class WorkspaceService {
       }
     );
   }
-  workspaceDeleted: EventEmitter<ObjectId> = new EventEmitter<ObjectId>();
 
   async fetchWorkspaces() {
     try {
       const workspaces = await this.apiSvc.getWorkspaces();
-      this.workspaces = workspaces;
-      this.currentWorkspace = this.workspaces[0];
-      this.currentWorkspaceId = this.currentWorkspace._id;
-      this.workspaceInfo = this.extractWorkspaceInfo(workspaces);
-      console.log(workspaces);
-      console.log(this.workspaceInfo);
+      this.workspaces = workspaces || []; // Initialize to an empty array if workspaces is undefined
+      if (this.workspaces.length > 0) {
+        this.currentWorkspace = this.workspaces[0];
+        this.currentWorkspaceId = this.currentWorkspace._id;
+        this.workspaceInfo = this.extractWorkspaceInfo(workspaces);
+        console.log(workspaces);
+        console.log(this.workspaceInfo);
+      } else {
+        this.isTableEmpty = true;
+      }
     } catch (error) {
       console.error('Error occurred while fetching workspaces:', error);
       // Handle the error appropriately
     }
   }
 
-  changeWorkspace(wspId: ObjectId): Workspace {
+  changeWorkspace(wspId: ObjectId): Workspace | undefined {
     const foundWorkspace = this.workspaces.find((wsp) => wsp._id === wspId);
     if (foundWorkspace) {
       this.currentWorkspace = foundWorkspace;
