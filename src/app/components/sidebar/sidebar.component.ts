@@ -5,7 +5,7 @@ import { ObjectId } from 'mongodb';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css'],
+  styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
   @Output() changeWorkspaceEvent = new EventEmitter<ObjectId>();

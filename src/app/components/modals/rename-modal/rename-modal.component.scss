@@ -1,0 +1,50 @@
+@import "src/styles.scss";
+
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  z-index: 1200;
+  /* Enables scrolling for taller modals. */
+  overflow: auto;
+}
+
+.modalBody {
+  padding: 20px;
+  background-color: $ltGray;
+  margin: 40px;
+}
+
+.modalBackground {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  background-color: black;
+  opacity: 0.75;
+  z-index: 1100;
+}
+.modal button {
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.modal button[type="submit"] {
+  background-color: $minty;
+}
+.modal button[type="submit"]:hover {
+  background-color: $minty-tinted;
+}
+.modal button[type="cancel"] {
+  background-color: $error;
+}
+.modal button[type="cancel"]:hover {
+  background-color: $error-tinted;
+}

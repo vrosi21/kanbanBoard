@@ -7,7 +7,7 @@ import { BoardService } from 'src/app/services/board.service';
 @Component({
   selector: 'app-kanban-page',
   templateUrl: './kanban-page.component.html',
-  styleUrls: ['./kanban-page.component.css'],
+  styleUrls: ['./kanban-page.component.scss'],
 })
 export class KanbanPageComponent implements OnInit {
   faArrowLeft = faArrowLeft;

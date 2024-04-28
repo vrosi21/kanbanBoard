@@ -1,0 +1,51 @@
+@import "src/styles.scss";
+/* Add a black background color to the top navigation */
+.topnav {
+  position: relative; // Ensure a positioning context for absolute positioning
+  background-color: $matt;
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-end;
+  height: 64px;
+
+  // Style the logo
+  .logo {
+    cursor: default;
+    position: absolute; // Position the logo absolutely
+    left: 5px; // Adjust the left position as needed
+    top: 50%; // Align the top of the logo to the middle of the topnav
+    transform: translateY(-50%); // Adjust vertical alignment
+    font-weight: bold;
+    font-size: 42px;
+    color: $ltGray; // Greyish white color
+    padding: 14px 16px;
+  }
+
+  // Style the links inside the navigation bar
+  a {
+    float: left;
+    display: block;
+    color: $ltGray;
+    text-align: center;
+    padding: 20px 16px; // Adjust top and bottom padding to 20px
+    text-decoration: none;
+    font-size: 20px;
+
+    // Change the color of links on hover
+    &:hover {
+      background-color: $ltGray;
+      color: $matt;
+    }
+
+    // Add an active class to highlight the current page
+    &.active {
+      background-color: $minty;
+      color: white;
+    }
+  }
+
+  // Hide the link that should open and close the topnav on small screens
+  .icon {
+    display: none;
+  }
+}

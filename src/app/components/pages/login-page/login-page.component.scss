@@ -1,0 +1,68 @@
+@import "src/styles.scss";
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 128px 20px;
+}
+
+/* Login form styles */
+.login-form {
+  background-color: $ltGray;
+  color: $matt;
+  padding: 32px 20px;
+  flex: 1;
+  max-width: 500px;
+  margin: 0 20px;
+  text-align: center;
+
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  form {
+    padding: 20px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    input,
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+      border: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s;
+
+      &:focus {
+        border-bottom-color: $minty;
+      }
+    }
+
+    button {
+      background-color: $minty;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $minty-tinted;
+      }
+    }
+  }
+}
+
+/* Error message styles */
+.errMsg {
+  padding: 48px 48px;
+  font-size: 36px;
+  font-weight: bold;
+  background-color: $ltGray;
+  color: $error;
+}

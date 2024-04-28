@@ -1,0 +1,97 @@
+@import "src/styles.scss";
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 220px;
+  background-color: $ltGray;
+  height: 100%;
+  overflow: auto;
+  position: relative;
+
+  a {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $matt;
+    padding: 16px;
+    text-decoration: none;
+    position: relative;
+
+    span {
+      flex-grow: 1; /* Occupy remaining space */
+    }
+
+    &:hover {
+      background-color: $drkGray;
+      color: white;
+    }
+
+    /* Active/current link */
+    &.active {
+      background-color: $minty;
+      color: white;
+    }
+  }
+
+  /* Form */
+  form {
+    padding: 8px;
+
+    input[type="text"] {
+      color: $matt;
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      border: none;
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+      transition: border-color 0.3s;
+
+      &:focus {
+        border-bottom-color: $minty;
+      }
+    }
+
+    button[type="submit"] {
+      background-color: $minty;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $minty-tinted;
+      }
+    }
+  }
+
+  /* Error message */
+  .error-message {
+    font-size: 12px;
+    color: $error;
+    font-weight: bold;
+    padding-left: 3px;
+    padding-bottom: 5px;
+  }
+
+  /* Error styling */
+  .error {
+    border-bottom-color: $error !important;
+  }
+
+  /* Icon styling */
+  fa-icon[type="rename"]:hover {
+    color: $gold;
+  }
+
+  fa-icon[type="delete"]:hover {
+    color: $error;
+  }
+}
+fa-icon {
+  margin-left: 5px; /* Add margin between icons */
+}

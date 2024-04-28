@@ -4,7 +4,7 @@ import { ObjectId } from 'mongodb';
 @Component({
   selector: 'app-rename-modal',
   templateUrl: './rename-modal.component.html',
-  styleUrls: ['./rename-modal.component.css'],
+  styleUrls: ['./rename-modal.component.scss'],
 })
 export class RenameModalComponent {
   @Input() workspaceTitle?: string;

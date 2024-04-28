@@ -1,0 +1,246 @@
+@import "src/styles.scss";
+
+.hero-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  --padding-top: 5%;
+  padding: calc(var(--padding-top) + 64px) 10% 5%;
+}
+
+.logoNSlogan {
+  padding: 128px 0px;
+  flex: 2;
+  text-align: center;
+
+  h1 {
+    font-family: sans-serif;
+    font-weight: bold;
+    color: $minty;
+    font-size: 48px;
+  }
+
+  p {
+    font-family: sans-serif;
+    color: $minty-tinted;
+    font-size: 24px;
+    font-style: italic;
+  }
+}
+
+.loginForm {
+  background-color: $ltGray;
+  color: $matt;
+  padding: 32px 20px;
+  flex: 1;
+  max-width: calc(33.33% - 20px);
+  margin-left: 20px;
+  text-align: center;
+
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    input[type="text"],
+    input[type="password"] {
+      padding: 10px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+      border: none;
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+      transition: border-color 0.3s;
+      background-color: transparent;
+      color: $matt;
+      width: 100%;
+
+      &::placeholder {
+        color: $matt;
+      }
+
+      &:focus {
+        border-bottom-color: $minty;
+      }
+    }
+
+    p {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: $minty;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 0 auto;
+
+      &:hover {
+        background-color: $minty-tinted;
+      }
+    }
+  }
+}
+
+/* Kanban info styles */
+.kanban-info {
+  background-color: $matt;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: $ltGray;
+  padding: 5% 10%;
+}
+
+.whatIsKanban,
+.howToUse,
+.benefits {
+  flex: 1;
+  width: calc(33.33% - 20px);
+  margin-right: 20px;
+  padding: 0px 20px;
+
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-family: sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      margin-bottom: 10px;
+      padding-left: 20px;
+      text-indent: -15px;
+      position: relative;
+
+      &::before {
+        content: "\2022";
+        color: $minty;
+        font-size: 1.5em;
+        font-weight: bold;
+        position: absolute;
+        left: 0px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
+/* Content section styles */
+.content-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 5% 10%;
+}
+
+.feature,
+.testimonial,
+.call-to-action {
+  padding: 0px 20px;
+}
+
+.feature {
+  flex: 1;
+  max-width: 400px;
+  margin-bottom: 30px;
+
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: $matt;
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 16px;
+    color: $matt;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+}
+
+.testimonial {
+  flex: 1;
+  max-width: 400px;
+  margin-bottom: 30px;
+
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: $matt;
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 16px;
+    color: $matt;
+  }
+
+  .author {
+    margin-top: 10px;
+    font-style: italic;
+    color: $matt;
+  }
+}
+
+.call-to-action {
+  flex: 1;
+  max-width: 400px;
+  margin-bottom: 30px;
+
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: $matt;
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 16px;
+    color: $matt;
+    margin-bottom: 15px;
+  }
+
+  .btn {
+    background-color: $minty;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &.btn-primary {
+      background-color: $minty;
+    }
+
+    &:hover,
+    &.btn-primary:hover {
+      background-color: $minty-tinted;
+    }
+  }
+}
