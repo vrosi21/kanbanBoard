@@ -14,8 +14,8 @@ export class SidebarComponent implements OnInit {
   renameIcon = faPencilAlt;
   newWorkspaceTitle: string = '';
   isOpenRnmMdl: boolean = false;
-  wspRenameTitle?: string;
-  wspRenameId?: ObjectId;
+  wspRenameTitle!: string;
+  wspRenameId!: ObjectId;
 
   constructor(public workspaceSvc: WorkspaceService) {}
 
@@ -27,8 +27,6 @@ export class SidebarComponent implements OnInit {
 
   closeModal() {
     this.isOpenRnmMdl = false;
-    this.wspRenameTitle = undefined;
-    this.wspRenameId = undefined;
   }
 
   addNewWorkspace() {

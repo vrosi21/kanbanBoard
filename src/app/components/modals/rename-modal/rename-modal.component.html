@@ -1,10 +1,19 @@
 <div class="modal">
   <div class="modalBody">
-    <p>Current title: {{ workspaceTitle }}</p>
-    <p>Current ID: {{ workspaceId }}</p>
-
-    <button type="cancel" (click)="close()">Cancel</button>
-    <button type="submit">Rename</button>
+    <h2>Rename {{ workspaceTitle }} workspace</h2>
+    <input
+      type="text"
+      placeholder="New title"
+      [(ngModel)]="newTitle"
+      [ngClass]="{ error: hasError }"
+    />
+    <div class="error-message" *ngIf="hasError">
+      Please enter a workspace title!
+    </div>
+    <div class="button-container">
+      <button type="cancel" (click)="close()">Cancel</button>
+      <button type="submit" (click)="renameWsp()">Rename</button>
+    </div>
   </div>
 </div>
 

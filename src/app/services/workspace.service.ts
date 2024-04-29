@@ -2,6 +2,8 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Workspace, WorkspaceInfo } from '../models/board.model';
 import { ObjectId } from 'mongodb';
 import { ApiService } from './api.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -32,12 +34,31 @@ export class WorkspaceService {
         this.newWorkspaceAdded.emit(this.currentWorkspaceId);
       },
       (error) => {
-        console.error('Error creating new workspace:', error);
-        // Handle error accordingly
+        this.handleHttpError(error);
       }
     );
   }
+
   newWorkspaceAdded: EventEmitter<ObjectId> = new EventEmitter<ObjectId>();
+
+  renameWorkspace(wspId: ObjectId, newTitle: string) {
+    this.apiSvc.renameWorkspace(wspId, newTitle).subscribe(
+      () => {
+        // Find the workspace in your application's data and update its title
+        const workspaceToUpdate = this.workspaceInfo.find(
+          (workspace) => workspace._id === wspId
+        );
+        if (workspaceToUpdate) {
+          workspaceToUpdate.title = newTitle;
+        } else {
+          console.error('Workspace not found in application data.');
+        }
+      },
+      (error) => {
+        this.handleHttpError(error);
+      }
+    );
+  }
 
   deleteWorkspace(wspId: ObjectId) {
     this.apiSvc.deleteWorkspace(wspId).subscribe(
@@ -67,8 +88,7 @@ export class WorkspaceService {
         }
       },
       (error) => {
-        console.error('Error deleting workspace:', error);
-        //TODO: Handle error.
+        this.handleHttpError(error);
       }
     );
   }
@@ -87,8 +107,7 @@ export class WorkspaceService {
         this.isTableEmpty = true;
       }
     } catch (error) {
-      console.error('Error occurred while fetching workspaces:', error);
-      // Handle the error appropriately
+      this.handleHttpError(error);
     }
   }
 
@@ -101,5 +120,18 @@ export class WorkspaceService {
       console.error(`Workspace with ID ${wspId} not found.`);
     }
     return this.currentWorkspace;
+  }
+
+  private handleHttpError(error: any) {
+    console.error('HTTP error occurred:', error);
+    if (error instanceof HttpErrorResponse) {
+      if (error.status === 404) {
+        console.error('Workspace not found.');
+      } else {
+        console.error('An unexpected HTTP error occurred.');
+      }
+    } else {
+      console.error('An unexpected error occurred.');
+    }
   }
 }

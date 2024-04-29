@@ -8,7 +8,7 @@ import { LoginData, UserData } from '../models/user.model';
   providedIn: 'root',
 })
 export class AuthService {
-  path: string = 'http://localhost:3000/auth';
+  authUrl: string = 'http://localhost:3000/auth';
   constructor(private http: HttpClient) {}
 
   get token() {
@@ -24,7 +24,7 @@ export class AuthService {
   }
 
   loginUser(loginData: LoginData): Observable<any> {
-    return this.http.post(this.path + '/login', loginData).pipe(
+    return this.http.post(this.authUrl + '/login', loginData).pipe(
       catchError((error) => {
         console.error('Error occurred during user login:', error);
         throw error;
@@ -34,7 +34,7 @@ export class AuthService {
 
   registerUser(registerData: UserData): Observable<any> {
     return this.http
-      .post(this.path + '/register', registerData, {
+      .post(this.authUrl + '/register', registerData, {
         responseType: 'text',
       })
       .pipe(

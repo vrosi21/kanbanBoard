@@ -1,16 +1,9 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { NewWorkspaceTemplateService } from './new-workspace-template.service';
 import { ObjectId } from 'mongodb';
-import { WorkspaceService } from './workspace.service';
-import { Workspace } from '../models/board.model';
-
-interface RegisterData {
-  email: string;
-  password: string;
-}
 
 @Injectable({
   providedIn: 'root',
@@ -47,6 +40,18 @@ export class ApiService {
       console.error('Error occurred:', error);
       throw new Error('An error occurred while processing your request.');
     }
+  }
+
+  renameWorkspace(wspId: ObjectId, newWspTitle: string): Observable<any> {
+    const url = `${this.apiUrl}/workspace/${wspId}/rename`;
+    const body = { newTitle: newWspTitle };
+
+    return this.http.put<any>(url, body).pipe(
+      catchError((error) => {
+        console.error('Error renaming workspace:', error);
+        return throwError('An error occurred while renaming workspace.');
+      })
+    );
   }
 
   deleteWorkspace(wspId: ObjectId): Observable<any> {
