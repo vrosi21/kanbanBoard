@@ -56,7 +56,6 @@ export class ApiService {
 
   deleteWorkspace(wspId: ObjectId): Observable<any> {
     const url = this.apiUrl + '/workspace/' + wspId;
-    console.log(url);
 
     return this.http.delete<any>(url);
   }

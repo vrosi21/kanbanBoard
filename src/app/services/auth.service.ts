@@ -3,13 +3,20 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { LoginData, UserData } from '../models/user.model';
+import { WorkspaceService } from './workspace.service';
+interface AuthResponse {
+  token: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   authUrl: string = 'http://localhost:3000/auth';
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private workspaceSvc: WorkspaceService
+  ) {}
 
   get token() {
     return localStorage.getItem('token');
@@ -20,6 +27,7 @@ export class AuthService {
   }
 
   logout() {
+    this.workspaceSvc.clearCache();
     localStorage.removeItem('token');
   }
 
@@ -32,15 +40,13 @@ export class AuthService {
     );
   }
 
-  registerUser(registerData: UserData): Observable<any> {
+  registerUser(registerData: UserData): Observable<AuthResponse> {
     return this.http
-      .post(this.authUrl + '/register', registerData, {
-        responseType: 'text',
-      })
+      .post<AuthResponse>(this.authUrl + '/register', registerData)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           console.error('Error occurred:', error);
-          return throwError('An error occurred while processing your request.'); // Return a custom error message
+          return throwError('An error occurred while processing your request.');
         })
       );
   }

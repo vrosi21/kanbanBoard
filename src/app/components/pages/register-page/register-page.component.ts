@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-
+interface AuthResponse {
+  token: string;
+}
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
@@ -17,8 +19,6 @@ export class RegisterPageComponent {
 
   submitRegisterData() {
     if (this.password !== this.rePassword) {
-      //TODO: Add error handling!
-
       console.error('Passwords do not match');
       return;
     }
@@ -30,14 +30,14 @@ export class RegisterPageComponent {
     };
 
     this.authSvc.registerUser(registerData).subscribe(
-      (res) => {
+      (res: AuthResponse) => {
         console.log('Registration successful:', res);
         localStorage.setItem('token', res.token);
         this.router.navigate(['/kanban']);
       },
       (error) => {
         console.error('Error occurred:', error);
-        //TODO: Add error handling!
+        // Handle error
       }
     );
 

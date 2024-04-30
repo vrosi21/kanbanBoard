@@ -28,6 +28,7 @@ export class WorkspaceService {
     this.apiSvc.saveNewWorkspace(wspTitle).subscribe(
       (res: any) => {
         console.log('Added new workspace with ID:', res._id);
+        this.isTableEmpty = false;
 
         this.currentWorkspaceId = res._id;
 
@@ -98,11 +99,11 @@ export class WorkspaceService {
       const workspaces = await this.apiSvc.getWorkspaces();
       this.workspaces = workspaces || []; // Initialize to an empty array if workspaces is undefined
       if (this.workspaces.length > 0) {
+        this.isTableEmpty = false;
+
         this.currentWorkspace = this.workspaces[0];
         this.currentWorkspaceId = this.currentWorkspace._id;
         this.workspaceInfo = this.extractWorkspaceInfo(workspaces);
-        console.log(workspaces);
-        console.log(this.workspaceInfo);
       } else {
         this.isTableEmpty = true;
       }
@@ -133,5 +134,13 @@ export class WorkspaceService {
     } else {
       console.error('An unexpected error occurred.');
     }
+  }
+
+  clearCache() {
+    this.workspaces = [];
+    this.currentWorkspace = undefined;
+    this.currentWorkspaceId = undefined;
+    this.workspaceInfo = [];
+    this.isTableEmpty = false;
   }
 }
