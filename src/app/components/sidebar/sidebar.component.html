@@ -9,14 +9,16 @@
       [icon]="renameIcon"
       type="rename"
       (click)="
-        openModal(workspace.title, workspace._id); $event.stopPropagation()
+        modalSvc.openRenameModal(workspace._id, workspace.title);
+        $event.stopPropagation()
       "
     ></fa-icon>
     <fa-icon
       [icon]="trashIcon"
       type="delete"
       (click)="
-        workspaceSvc.deleteWorkspace(workspace._id); $event.stopPropagation()
+        modalSvc.openDeleteModal(workspace._id, workspace.title);
+        $event.stopPropagation()
       "
     >
     </fa-icon>
@@ -37,10 +39,5 @@
   </form>
 </div>
 
-<app-rename-modal
-  *ngIf="isOpenRnmMdl"
-  [workspaceTitle]="wspRenameTitle"
-  [workspaceId]="wspRenameId"
-  (closeModal)="closeModal()"
->
-</app-rename-modal>
+<app-rename-modal *ngIf="modalSvc.isOpenRnmMdl"> </app-rename-modal>
+<app-delete-modal *ngIf="modalSvc.isOpenDltMdl"></app-delete-modal>

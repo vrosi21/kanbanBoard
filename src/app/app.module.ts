@@ -18,6 +18,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginPageComponent } from './components/pages/login-page/login-page.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { RenameModalComponent } from './components/modals/rename-modal/rename-modal.component';
+import { DeleteModalComponent } from './components/modals/delete-modal/delete-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import { RenameModalComponent } from './components/modals/rename-modal/rename-mo
     FooterComponent,
     LoginPageComponent,
     RenameModalComponent,
+    DeleteModalComponent,
   ],
   imports: [
     BrowserModule,

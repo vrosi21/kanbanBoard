@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ObjectId } from 'mongodb';
+import { ModalService } from 'src/app/services/modal.service';
 import { WorkspaceService } from 'src/app/services/workspace.service';
 
 @Component({
@@ -8,22 +8,25 @@ import { WorkspaceService } from 'src/app/services/workspace.service';
   styleUrls: ['./rename-modal.component.scss'],
 })
 export class RenameModalComponent {
-  newTitle: string = '';
+  newTitle: string = this.modalSvc.workspaceTitle;
   hasError: boolean = false;
-  @Input() workspaceTitle!: string;
-  @Input() workspaceId!: ObjectId;
-  @Output() closeModal: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private workspaceSvc: WorkspaceService) {}
+  constructor(
+    private workspaceSvc: WorkspaceService,
+    public modalSvc: ModalService
+  ) {}
 
   close() {
-    this.closeModal.emit();
+    this.modalSvc.isOpenRnmMdl = false;
   }
 
-  renameWsp() {
+  renameWorkspace() {
     if (this.newTitle !== '') {
       this.hasError = false;
-      this.workspaceSvc.renameWorkspace(this.workspaceId, this.newTitle);
+      this.workspaceSvc.renameWorkspace(
+        this.modalSvc.workspaceId,
+        this.newTitle
+      );
       this.close();
     } else {
       this.hasError = true;

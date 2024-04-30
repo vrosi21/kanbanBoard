@@ -1,6 +1,9 @@
 <div class="modal">
   <div class="modalBody">
-    <h2>Rename {{ workspaceTitle }} workspace</h2>
+    <h2>
+      Rename
+      <span class="wspTitle">{{ modalSvc.workspaceTitle }}</span> workspace
+    </h2>
     <input
       type="text"
       placeholder="New title"
@@ -12,7 +15,7 @@
     </div>
     <div class="button-container">
       <button type="cancel" (click)="close()">Cancel</button>
-      <button type="submit" (click)="renameWsp()">Rename</button>
+      <button type="submit" (click)="renameWorkspace()">Rename</button>
     </div>
   </div>
 </div>

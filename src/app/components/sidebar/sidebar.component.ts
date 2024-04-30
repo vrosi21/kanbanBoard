@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { WorkspaceService } from 'src/app/services/workspace.service';
 import { faTrashAlt, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { ObjectId } from 'mongodb';
+import { ModalService } from 'src/app/services/modal.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -13,21 +14,11 @@ export class SidebarComponent implements OnInit {
   trashIcon = faTrashAlt;
   renameIcon = faPencilAlt;
   newWorkspaceTitle: string = '';
-  isOpenRnmMdl: boolean = false;
-  wspRenameTitle!: string;
-  wspRenameId!: ObjectId;
 
-  constructor(public workspaceSvc: WorkspaceService) {}
-
-  openModal(wspTitle: string, wspId: ObjectId) {
-    this.isOpenRnmMdl = true;
-    this.wspRenameTitle = wspTitle;
-    this.wspRenameId = wspId;
-  }
-
-  closeModal() {
-    this.isOpenRnmMdl = false;
-  }
+  constructor(
+    public workspaceSvc: WorkspaceService,
+    public modalSvc: ModalService
+  ) {}
 
   addNewWorkspace() {
     if (this.newWorkspaceTitle.trim() !== '') {

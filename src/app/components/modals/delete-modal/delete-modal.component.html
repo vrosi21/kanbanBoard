@@ -1,0 +1,18 @@
+<div class="modal">
+  <div class="modalBody">
+    <h2>
+      Delete
+      <span class="wspTitle">{{ modalSvc.workspaceTitle }}</span> workspace
+    </h2>
+    <p>
+      Are you sure you want to delete the
+      <span class="wspTitle">{{ modalSvc.workspaceTitle }}</span> workspace?
+    </p>
+    <div class="button-container">
+      <button type="cancel" (click)="close()">Cancel</button>
+      <button type="submit" (click)="deleteWorkspace()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalBackground"></div>
