@@ -1,4 +1,29 @@
 <div class="board" [ngStyle]="{ 'background-color': board.colour }">
-	<div class="title">{{ board.title }}</div>
-	<app-note *ngFor="let note of board.arrayOfNotes" [note]="note"></app-note>
+  <div class="board-header">
+    <div class="title">{{ board.title }}</div>
+    <div class="icons">
+      <fa-icon
+        [icon]="renameIcon"
+        type="rename"
+        (click)="
+          modalSvc.openEditModal(
+            board._id!,
+            board.title,
+            'board',
+            board.colour
+          );
+          $event.stopPropagation()
+        "
+      ></fa-icon>
+      <fa-icon
+        [icon]="trashIcon"
+        type="delete"
+        (click)="
+          modalSvc.openDeleteModal(board._id!, board.title, 'board');
+          $event.stopPropagation()
+        "
+      ></fa-icon>
+    </div>
+  </div>
+  <!-- <app-note *ngFor="let note of board.arrayOfNotes" [note]="note"></app-note> -->
 </div>

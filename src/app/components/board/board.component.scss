@@ -1,14 +1,32 @@
+@import "src/styles.scss";
+
 .board {
-	width: 200px;
-	padding: 20px;
-	border-radius: 10px;
-	margin: 20px;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-}
-.title {
-	font-size: 18px; /* Title font size */
-	font-weight: bold; /* Title font weight */
-	padding-bottom: 10px; /* Add some space below the title */
+  width: 200px;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  .board-header {
+    display: flex;
+    justify-content: space-between; /* Space out title and icons */
+    align-items: center; /* Align items vertically */
+    width: 100%; /* Ensure full width */
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .icons fa-icon {
+      margin-left: 5px;
+      color: $ltGray;
+    }
+    fa-icon[type="rename"]:hover {
+      color: $gold;
+    }
+
+    fa-icon[type="delete"]:hover {
+      color: $error;
+    }
+  }
 }

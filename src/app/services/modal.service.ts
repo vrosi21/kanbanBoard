@@ -5,22 +5,46 @@ import { ObjectId } from 'mongodb';
   providedIn: 'root',
 })
 export class ModalService {
-  isOpenRnmMdl: boolean = false;
+  isOpenEdtMdl: boolean = false;
   isOpenDltMdl: boolean = false;
-  workspaceId!: ObjectId;
-  workspaceTitle!: string;
+  isOpenAuthMdl: boolean = false;
+  isOpenNewBrdMdl: boolean = false;
+
+  isLoginMode!: boolean;
+
+  objectId!: ObjectId;
+  objectTitle!: string;
+  objectType!: string;
+  objectColor!: string;
 
   constructor() {}
 
-  openRenameModal(wspId: ObjectId, wspTitle: string) {
-    this.isOpenRnmMdl = true;
-    this.workspaceId = wspId;
-    this.workspaceTitle = wspTitle;
+  openNewBoardModal() {
+    this.isOpenNewBrdMdl = true;
   }
 
-  openDeleteModal(wspId: ObjectId, wspTitle: string) {
+  openLoginModal() {
+    this.isLoginMode = true;
+    this.isOpenAuthMdl = true;
+  }
+
+  openRegisterModal() {
+    this.isLoginMode = false;
+    this.isOpenAuthMdl = true;
+  }
+
+  openEditModal(id: ObjectId, title: string, type: string, color?: string) {
+    this.isOpenEdtMdl = true;
+    this.objectId = id;
+    this.objectTitle = title;
+    this.objectType = type;
+    if (color) this.objectColor = color;
+  }
+
+  openDeleteModal(id: ObjectId, title: string, type: string) {
     this.isOpenDltMdl = true;
-    this.workspaceId = wspId;
-    this.workspaceTitle = wspTitle;
+    this.objectId = id;
+    this.objectTitle = title;
+    this.objectType = type;
   }
 }

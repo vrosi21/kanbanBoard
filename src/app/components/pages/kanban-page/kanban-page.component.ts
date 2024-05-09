@@ -3,6 +3,7 @@ import { WorkspaceService } from 'src/app/services/workspace.service';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth.service';
 import { BoardService } from 'src/app/services/board.service';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-kanban-page',
@@ -14,7 +15,8 @@ export class KanbanPageComponent implements OnInit {
   constructor(
     public workspaceSvc: WorkspaceService,
     public authSvc: AuthService,
-    public boardSvc: BoardService
+    public boardSvc: BoardService,
+    public modalSvc: ModalService
   ) {}
 
   async ngOnInit() {

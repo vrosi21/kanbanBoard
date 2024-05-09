@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ObjectId } from 'mongodb';
+import { BoardService } from 'src/app/services/board.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { WorkspaceService } from 'src/app/services/workspace.service';
 
@@ -11,6 +11,7 @@ import { WorkspaceService } from 'src/app/services/workspace.service';
 export class DeleteModalComponent implements OnInit {
   constructor(
     public workspaceService: WorkspaceService,
+    public boardService: BoardService,
     public modalSvc: ModalService
   ) {}
 
@@ -18,8 +19,14 @@ export class DeleteModalComponent implements OnInit {
     this.modalSvc.isOpenDltMdl = false;
   }
 
-  deleteWorkspace() {
-    this.workspaceService.deleteWorkspace(this.modalSvc.workspaceId);
+  deleteObject() {
+    if (this.modalSvc.objectType == 'workspace') {
+      this.workspaceService.deleteWorkspace(this.modalSvc.objectId);
+    } else if (this.modalSvc.objectType == 'board') {
+      this.boardService.deleteBoard(this.modalSvc.objectId);
+    } else if (this.modalSvc.objectType == 'note') {
+    }
+
     this.close();
   }
 

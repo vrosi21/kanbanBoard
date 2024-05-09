@@ -1,0 +1,61 @@
+<div class="modal">
+  <div class="modalBody">
+    <div class="modalHeader">
+      <fa-icon [icon]="faTimes" (click)="close()"></fa-icon>
+    </div>
+    <form *ngIf="modalSvc.isLoginMode; else registerForm" (submit)="onLogin()">
+      <input
+        type="email"
+        placeholder="Email"
+        [(ngModel)]="email"
+        name="email"
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        [(ngModel)]="password"
+        name="password"
+      />
+      <button type="submit">Login</button>
+      <p>
+        Don't have an account?
+        <span class="link" (click)="switchMode()">Register now!</span>
+      </p>
+    </form>
+    <ng-template #registerForm>
+      <form (submit)="onRegister()">
+        <input
+          type="text"
+          placeholder="Username"
+          [(ngModel)]="username"
+          name="username"
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          [(ngModel)]="email"
+          name="email"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          [(ngModel)]="password"
+          name="password"
+        />
+        <input
+          type="password"
+          placeholder="Re-enter Password"
+          [(ngModel)]="rePassword"
+          name="reEnterPassword"
+        />
+        <button type="submit">Register</button>
+        <p>
+          Already have an account?
+          <span class="link" (click)="switchMode()">Switch to login.</span>
+        </p>
+      </form>
+    </ng-template>
+  </div>
+</div>
+
+<div class="modalBackground"></div>

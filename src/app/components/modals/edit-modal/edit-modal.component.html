@@ -1,0 +1,31 @@
+<div class="modal">
+  <div class="modalBody">
+    <h2>
+      Edit
+      <span class="wspTitle">{{ modalSvc.objectTitle }}</span>
+      {{ modalSvc.objectType }}
+    </h2>
+    <input
+      type="text"
+      placeholder="New title"
+      [(ngModel)]="newTitle"
+      [ngClass]="{ error: inputEmptyErr }"
+      (input)="onInput()"
+    />
+    <div class="error-message" *ngIf="inputEmptyErr">
+      Please enter a {{ modalSvc.objectType }} title!
+    </div>
+    <app-color-picker
+      *ngIf="modalSvc.objectType == 'board' || modalSvc.objectType == 'note'"
+      (colorSelected)="onColorSelected($event)"
+      [selectedColor]="boardColor"
+    ></app-color-picker>
+    <div class="error-message" *ngIf="noColorErr">Please select a color!</div>
+    <div class="button-container">
+      <button type="cancel" (click)="close()">Cancel</button>
+      <button type="submit" (click)="edit()">Submit</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalBackground"></div>

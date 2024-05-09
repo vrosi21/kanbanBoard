@@ -2,15 +2,17 @@
   <div class="modalBody">
     <h2>
       Delete
-      <span class="wspTitle">{{ modalSvc.workspaceTitle }}</span> workspace
+      <span class="wspTitle">{{ modalSvc.objectTitle }}</span>
+      {{ modalSvc.objectType }}
     </h2>
     <p>
       Are you sure you want to delete the
-      <span class="wspTitle">{{ modalSvc.workspaceTitle }}</span> workspace?
+      <span class="wspTitle">{{ modalSvc.objectTitle }}</span>
+      {{ modalSvc.objectType }}?
     </p>
     <div class="button-container">
       <button type="cancel" (click)="close()">Cancel</button>
-      <button type="submit" (click)="deleteWorkspace()">Delete</button>
+      <button type="submit" (click)="deleteObject()">Delete</button>
     </div>
   </div>
 </div>

@@ -1,62 +1,58 @@
-import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { NewWorkspaceTemplateService } from './new-workspace-template.service';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ObjectId } from 'mongodb';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class ApiService {
-  apiUrl: string = 'http://localhost:3000/api';
-  changedWspId!: ObjectId;
-  newWorkspaceCreated = new EventEmitter<ObjectId>();
+export class ApiService<T> {
+  protected url = 'http://localhost:3000';
+  protected constructor(protected http: HttpClient, protected path: string) {}
 
-  constructor(
-    private http: HttpClient,
-    private workspaceTemplateSvc: NewWorkspaceTemplateService
-  ) {}
-
-  saveNewWorkspace(wspTitle: string): Observable<ObjectId> {
-    const newWorkspace =
-      this.workspaceTemplateSvc.generateNewWorkspace(wspTitle);
-    return this.http.post<any>(`${this.apiUrl}/workspace`, newWorkspace).pipe(
-      catchError((error) => {
-        console.error('Error adding workspace to DB:', error);
-        return throwError('An error occurred while adding workspace to DB.');
-      })
-    );
+  protected handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Backend returned code ${error.status}, ` +
+          `body was: ${JSON.stringify(error.error)}`
+      );
+      if (error.error && error.error.error) {
+        return throwError(error.error.error);
+      }
+    }
+    // If there's no specific error message in the response body, return a generic error message
+    return throwError('Something bad happened; please try again later.');
   }
 
-  async getWorkspaces(): Promise<any> {
+  async get(path?: string): Promise<any> {
     try {
-      const workspaces = await this.http
-        .get(`${this.apiUrl}/workspaces`)
+      const data = await this.http
+        .get(this.url + this.path + (path || ''))
         .toPromise();
 
-      return workspaces;
+      return data;
     } catch (error) {
       console.error('Error occurred:', error);
-      throw new Error('An error occurred while processing your request.');
     }
   }
 
-  renameWorkspace(wspId: ObjectId, newWspTitle: string): Observable<any> {
-    const url = `${this.apiUrl}/workspace/${wspId}/rename`;
-    const body = { newTitle: newWspTitle };
-
-    return this.http.put<any>(url, body).pipe(
-      catchError((error) => {
-        console.error('Error renaming workspace:', error);
-        return throwError('An error occurred while renaming workspace.');
-      })
-    );
+  post(data: T): Observable<any> {
+    return this.http
+      .post(this.url + this.path, data)
+      .pipe(catchError(this.handleError));
   }
 
-  deleteWorkspace(wspId: ObjectId): Observable<any> {
-    const url = this.apiUrl + '/workspace/' + wspId;
+  delete(id: ObjectId): Observable<any> {
+    return this.http.delete(this.url + this.path + id);
+  }
 
-    return this.http.delete<any>(url);
+  put(id: ObjectId, data: T): Observable<any> {
+    console.log('put', data);
+    return this.http
+      .put(this.url + this.path + id, data)
+      .pipe(catchError(this.handleError));
+  }
+
+  deleteByParent(deleteUrl: string): Observable<any> {
+    return this.http.delete(deleteUrl).pipe(catchError(this.handleError));
   }
 }

@@ -8,16 +8,10 @@
     >My Kanban</a
   >
   <a routerLink="/about" routerLinkActive="active">About</a>
-  <a
-    *ngIf="!authSvc.isAuthenticated"
-    routerLink="/login"
-    routerLinkActive="active"
+  <a *ngIf="!authSvc.isAuthenticated" (click)="modalSvc.openLoginModal()"
     >Log In</a
   >
-  <a
-    *ngIf="!authSvc.isAuthenticated"
-    routerLink="/register"
-    routerLinkActive="active"
+  <a *ngIf="!authSvc.isAuthenticated" (click)="modalSvc.openRegisterModal()"
     >Sign Up</a
   >
   <a
@@ -27,3 +21,5 @@
     >Logout</a
   >
 </div>
+
+<app-auth-modal *ngIf="modalSvc.isOpenAuthMdl"></app-auth-modal>

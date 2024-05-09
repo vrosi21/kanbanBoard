@@ -1,15 +1,15 @@
 <div class="sidebar">
   <a
-    *ngFor="let workspace of workspaceSvc.workspaceInfo"
-    [ngClass]="isCurrentWorkspace(workspace._id)"
-    (click)="workspaceSvc.changeWorkspace(workspace._id)"
+    *ngFor="let workspace of workspaceSvc.workspaces"
+    [ngClass]="isCurrentWorkspace(workspace._id!)"
+    (click)="workspaceSvc.changeWorkspace(workspace._id!)"
   >
     <span>{{ workspace?.title }}</span>
     <fa-icon
       [icon]="renameIcon"
       type="rename"
       (click)="
-        modalSvc.openRenameModal(workspace._id, workspace.title);
+        modalSvc.openEditModal(workspace._id!, workspace.title, 'workspace');
         $event.stopPropagation()
       "
     ></fa-icon>
@@ -17,7 +17,7 @@
       [icon]="trashIcon"
       type="delete"
       (click)="
-        modalSvc.openDeleteModal(workspace._id, workspace.title);
+        modalSvc.openDeleteModal(workspace._id!, workspace.title, 'workspace');
         $event.stopPropagation()
       "
     >
@@ -39,5 +39,5 @@
   </form>
 </div>
 
-<app-rename-modal *ngIf="modalSvc.isOpenRnmMdl"> </app-rename-modal>
+<app-edit-modal *ngIf="modalSvc.isOpenEdtMdl"> </app-edit-modal>
 <app-delete-modal *ngIf="modalSvc.isOpenDltMdl"></app-delete-modal>

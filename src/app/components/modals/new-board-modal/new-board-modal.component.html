@@ -1,0 +1,26 @@
+<div class="modal">
+  <div class="modalBody">
+    <h2>Create new board</h2>
+    <input
+      type="text"
+      placeholder="New title"
+      [(ngModel)]="newTitle"
+      [ngClass]="{ error: inputEmptyErr }"
+      (input)="onInput()"
+    />
+    <div class="error-message" *ngIf="inputEmptyErr">
+      Please enter a workspace title!
+    </div>
+    <app-color-picker
+      (colorSelected)="onColorSelected($event)"
+      [selectedColor]="boardColor"
+    ></app-color-picker>
+    <div class="error-message" *ngIf="noColorErr">Please select a color!</div>
+    <div class="button-container">
+      <button type="cancel" (click)="close()">Cancel</button>
+      <button type="submit" (click)="createNewBoard()">Add</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalBackground"></div>

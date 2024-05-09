@@ -1,12 +1,11 @@
 <div *ngIf="authSvc.isAuthenticated" class="mainContainer">
   <app-sidebar></app-sidebar>
   <div *ngIf="!workspaceSvc.isTableEmpty" class="home">
-    <!-- Use safe navigation operator to guard against accessing properties on potentially undefined objects -->
     <app-board
-      *ngFor="let board of workspaceSvc.currentWorkspace?.arrayOfBoards || []"
+      *ngFor="let board of boardSvc.boards || []"
       [board]="board"
     ></app-board>
-    <div class="add-board" (click)="boardSvc.addBoard()">
+    <div class="add-board" (click)="modalSvc.openNewBoardModal()">
       <span class="plus">+</span>
     </div>
   </div>
@@ -20,3 +19,8 @@
 <div *ngIf="!authSvc.isAuthenticated" class="authErr">
   <div class="errMsg">Please login/ sign up to use the tool!</div>
 </div>
+
+<app-new-board-modal
+  *ngIf="modalSvc.isOpenNewBrdMdl"
+  [currentWorkspaceId]="workspaceSvc.currentWorkspaceId"
+></app-new-board-modal>

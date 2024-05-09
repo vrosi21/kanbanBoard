@@ -16,9 +16,12 @@ import { RegisterPageComponent } from './components/pages/register-page/register
 import { FooterComponent } from './components/footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginPageComponent } from './components/pages/login-page/login-page.component';
-import { AuthInterceptorService } from './services/auth-interceptor.service';
-import { RenameModalComponent } from './components/modals/rename-modal/rename-modal.component';
+import { AuthInterceptorService } from './services/auth.interceptor.service';
+import { EditModalComponent } from './components/modals/edit-modal/edit-modal.component';
 import { DeleteModalComponent } from './components/modals/delete-modal/delete-modal.component';
+import { AuthModalComponent } from './components/modals/auth-modal/auth-modal.component';
+import { NewBoardModalComponent } from './components/modals/new-board-modal/new-board-modal.component';
+import { ColorPickerComponent } from './components/color-picker/color-picker.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,8 +35,11 @@ import { DeleteModalComponent } from './components/modals/delete-modal/delete-mo
     RegisterPageComponent,
     FooterComponent,
     LoginPageComponent,
-    RenameModalComponent,
+    EditModalComponent,
     DeleteModalComponent,
+    AuthModalComponent,
+    NewBoardModalComponent,
+    ColorPickerComponent,
   ],
   imports: [
     BrowserModule,

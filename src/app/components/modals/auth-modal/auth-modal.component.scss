@@ -1,0 +1,109 @@
+// auth-modal.component.scss
+
+@import "src/styles.scss";
+
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1200;
+  overflow: auto;
+  display: flex;
+  justify-content: center; // Center horizontally
+  align-items: flex-start;
+}
+
+.modalBody {
+  padding: 20px;
+  background-color: $ltGray;
+  margin-top: 192px;
+  max-width: 360px;
+  text-align: center; // Center elements horizontally
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: flex-end;
+  fa-icon {
+    color: $error;
+    font-size: 1.5rem;
+  }
+}
+
+.modalBackground {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: black;
+  opacity: 0.75;
+  z-index: 1100;
+}
+
+.modal h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.modal input[type="text"],
+.modal input[type="email"],
+.modal input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px; // Added vertical spacing
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.error-message {
+  font-size: 12px;
+  color: $error;
+  font-weight: bold;
+  padding-left: 3px;
+  padding-bottom: 5px;
+}
+
+.error {
+  border-bottom-color: $error !important;
+}
+
+.modal input[type="text"]:focus,
+.modal input[type="email"]:focus,
+.modal input[type="password"]:focus {
+  border-bottom-color: $minty;
+}
+
+.modal {
+  display: flex;
+  justify-content: center; // Center buttons horizontally
+  margin-top: 20px; // Added vertical spacing
+}
+
+.modal button {
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-bottom: 10px;
+
+  &[type="submit"] {
+    background-color: $minty;
+    &:hover {
+      background-color: $minty-tinted;
+    }
+  }
+
+  &[type="cancel"] {
+    background-color: $error;
+    &:hover {
+      background-color: $error-tinted;
+    }
+  }
+}
