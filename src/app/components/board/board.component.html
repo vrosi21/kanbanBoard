@@ -25,5 +25,8 @@
       ></fa-icon>
     </div>
   </div>
-  <!-- <app-note *ngFor="let note of board.arrayOfNotes" [note]="note"></app-note> -->
+  <app-note *ngFor="let note of notes" [note]="note"></app-note>
+  <div class="add-note" (click)="modalSvc.openCreateModal('note', board._id)">
+    <fa-icon [icon]="addIcon" type="add"></fa-icon>
+  </div>
 </div>

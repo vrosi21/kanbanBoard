@@ -1,13 +1,9 @@
 <div class="modal">
   <div class="modalBody">
-    <h2>
-      Edit
-      <span class="wspTitle">{{ modalSvc.objectTitle }}</span>
-      {{ modalSvc.objectType }}
-    </h2>
+    <h2>Create new {{ modalSvc.objectType }}</h2>
     <input
       type="text"
-      placeholder="New title"
+      placeholder="Enter {{ modalSvc.objectType }} title"
       [(ngModel)]="newTitle"
       [ngClass]="{ error: inputEmptyErr }"
       (input)="onInput()"
@@ -26,15 +22,14 @@
       ></textarea>
     </div>
     <app-color-picker
-      *ngIf="modalSvc.objectType == 'board' || modalSvc.objectType == 'note'"
-      [objectType]="modalSvc.objectType"
       (colorSelected)="onColorSelected($event)"
+      [objectType]="modalSvc.objectType"
       [selectedColor]="color"
     ></app-color-picker>
     <div class="error-message" *ngIf="noColorErr">Please select a color!</div>
     <div class="button-container">
       <button type="cancel" (click)="close()">Cancel</button>
-      <button type="submit" (click)="edit()">Submit</button>
+      <button type="submit" (click)="createNew()">Create</button>
     </div>
   </div>
 </div>

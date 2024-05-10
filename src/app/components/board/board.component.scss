@@ -1,7 +1,7 @@
 @import "src/styles.scss";
 
 .board {
-  width: 200px;
+  width: 300px;
   padding: 20px;
   border-radius: 10px;
   margin: 20px;
@@ -22,11 +22,33 @@
       color: $ltGray;
     }
     fa-icon[type="rename"]:hover {
-      color: $gold;
+      color: $edit;
     }
 
     fa-icon[type="delete"]:hover {
       color: $error;
+    }
+  }
+  app-note {
+    width: 100%;
+  }
+  .add-note {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: $ltGray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    fa-icon {
+      color: $matt;
+    }
+  }
+  .add-note:hover {
+    background-color: $minty;
+    fa-icon {
+      color: $ltGray;
     }
   }
 }

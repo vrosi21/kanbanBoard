@@ -1,14 +1,20 @@
 // Define your color palette
 $minty: #04aa6d;
 $minty-tinted: #055c3e;
-$gold: #ffd700;
-$gold-tinted: #756401;
 $error: #ed4337;
 $error-tinted: #812720;
+$edit: #fca311;
 $ltGray: #eeeeee;
 $midGray: #999999;
 $drkGray: #555;
 $matt: #333;
+
+$gold: #ffd700;
+$gold-tinted: #756401;
+
+.title {
+  word-wrap: break-word;
+}
 
 .link {
   color: $minty;

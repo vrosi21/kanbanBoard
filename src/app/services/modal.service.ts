@@ -8,19 +8,23 @@ export class ModalService {
   isOpenEdtMdl: boolean = false;
   isOpenDltMdl: boolean = false;
   isOpenAuthMdl: boolean = false;
-  isOpenNewBrdMdl: boolean = false;
+  isOpenCreateMdl: boolean = false;
 
   isLoginMode!: boolean;
 
   objectId!: ObjectId;
   objectTitle!: string;
+  objectDescription!: string;
   objectType!: string;
   objectColor!: string;
+  parent?: ObjectId;
 
   constructor() {}
 
-  openNewBoardModal() {
-    this.isOpenNewBrdMdl = true;
+  openCreateModal(type: string, parent?: ObjectId) {
+    this.objectType = type;
+    this.parent = parent;
+    this.isOpenCreateMdl = true;
   }
 
   openLoginModal() {
@@ -33,18 +37,25 @@ export class ModalService {
     this.isOpenAuthMdl = true;
   }
 
-  openEditModal(id: ObjectId, title: string, type: string, color?: string) {
-    this.isOpenEdtMdl = true;
+  openEditModal(
+    id: ObjectId,
+    title: string,
+    type: string,
+    color?: string,
+    desc?: string
+  ) {
     this.objectId = id;
     this.objectTitle = title;
     this.objectType = type;
     if (color) this.objectColor = color;
+    if (desc) this.objectDescription = desc;
+    this.isOpenEdtMdl = true;
   }
 
   openDeleteModal(id: ObjectId, title: string, type: string) {
-    this.isOpenDltMdl = true;
     this.objectId = id;
     this.objectTitle = title;
     this.objectType = type;
+    this.isOpenDltMdl = true;
   }
 }

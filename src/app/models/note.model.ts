@@ -1,10 +1,11 @@
-import { ObjectId } from 'mongodb'; // Import ObjectId from MongoDB library
+import { ObjectId } from 'mongodb';
 
 export interface Note {
-  _id: ObjectId; // Change _id type to ObjectId
+  _id?: ObjectId;
+  title: string;
   description: string;
   colour: string;
-  parent: ObjectId;
-  created: Date;
-  reminder: Date;
+  parent?: ObjectId;
+  created?: Date;
+  reminder?: Date;
 }

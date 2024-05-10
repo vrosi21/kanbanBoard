@@ -15,6 +15,8 @@ export class WorkspaceService extends ApiService<Workspace> {
   currentWorkspaceId?: ObjectId;
   isTableEmpty!: boolean;
 
+  newWorkspaceAdded: EventEmitter<ObjectId> = new EventEmitter<ObjectId>();
+
   constructor(http: HttpClient, private boardSvc: BoardService) {
     super(http, '/workspaces/');
   }
@@ -33,8 +35,6 @@ export class WorkspaceService extends ApiService<Workspace> {
       }
     );
   }
-
-  newWorkspaceAdded: EventEmitter<ObjectId> = new EventEmitter<ObjectId>();
 
   renameWorkspace(wspId: ObjectId, newTitle: string) {
     const renamedWorkspace: Workspace = { _id: wspId, title: newTitle };
@@ -75,7 +75,6 @@ export class WorkspaceService extends ApiService<Workspace> {
             this.currentWorkspaceId = undefined;
           }
 
-          // Return a new observable that makes the deleteByParent request
           const deleteUrl = `${this.url}/boards?parent=${wspId}`;
           return this.deleteByParent(deleteUrl);
         })
@@ -93,7 +92,7 @@ export class WorkspaceService extends ApiService<Workspace> {
 
   async fetchWorkspaces() {
     const workspaces = await this.get();
-    this.workspaces = workspaces || []; // Initialize to an empty array if workspaces is undefined
+    this.workspaces = workspaces || [];
     if (this.workspaces.length > 0) {
       this.isTableEmpty = false;
 

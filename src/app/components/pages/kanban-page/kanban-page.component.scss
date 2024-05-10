@@ -18,19 +18,26 @@
   flex-wrap: wrap;
 }
 .add-board {
-  margin-top: 64px;
-  margin-left: 16px;
-  width: 48px;
-  height: 48px;
-  background-color: $midGray; /* Greyish white color */
-  border-radius: 50%; /* To make it a circle */
-  cursor: pointer;
+  width: 200px;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px;
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  .plus {
-    color: black;
-    font-size: 32px; /* Adjust size as needed */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 48px;
+  background-color: $midGray;
+  cursor: pointer;
+  fa-icon {
+    color: $ltGray;
+  }
+}
+.add-board:hover {
+  background-color: $drkGray;
+  fa-icon {
+    color: white;
   }
 }
 

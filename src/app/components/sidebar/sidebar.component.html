@@ -4,7 +4,7 @@
     [ngClass]="isCurrentWorkspace(workspace._id!)"
     (click)="workspaceSvc.changeWorkspace(workspace._id!)"
   >
-    <span>{{ workspace?.title }}</span>
+    <span class="title">{{ workspace?.title }}</span>
     <fa-icon
       [icon]="renameIcon"
       type="rename"
@@ -38,6 +38,3 @@
     <button type="submit">Add</button>
   </form>
 </div>
-
-<app-edit-modal *ngIf="modalSvc.isOpenEdtMdl"> </app-edit-modal>
-<app-delete-modal *ngIf="modalSvc.isOpenDltMdl"></app-delete-modal>

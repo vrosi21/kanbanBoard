@@ -20,7 +20,7 @@ import { AuthInterceptorService } from './services/auth.interceptor.service';
 import { EditModalComponent } from './components/modals/edit-modal/edit-modal.component';
 import { DeleteModalComponent } from './components/modals/delete-modal/delete-modal.component';
 import { AuthModalComponent } from './components/modals/auth-modal/auth-modal.component';
-import { NewBoardModalComponent } from './components/modals/new-board-modal/new-board-modal.component';
+import { CreateModalComponent } from './components/modals/create-modal/create-modal.component';
 import { ColorPickerComponent } from './components/color-picker/color-picker.component';
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ import { ColorPickerComponent } from './components/color-picker/color-picker.com
     EditModalComponent,
     DeleteModalComponent,
     AuthModalComponent,
-    NewBoardModalComponent,
+    CreateModalComponent,
     ColorPickerComponent,
   ],
   imports: [

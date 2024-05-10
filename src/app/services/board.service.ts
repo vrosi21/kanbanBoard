@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ObjectId } from 'mongodb';
 import { mergeMap } from 'rxjs/operators';
 import { Board } from '../models/board.model';
+import { NoteService } from './note.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ import { Board } from '../models/board.model';
 export class BoardService extends ApiService<Board> {
   boards: Board[] = [];
   isWorkspaceEmpty!: boolean;
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient, private noteSvc: NoteService) {
     super(http, '/boards/');
   }
 
@@ -57,6 +58,8 @@ export class BoardService extends ApiService<Board> {
           renamedBoard.title,
           ' successfully.'
         );
+        console.log('PARENT:   ', res.parent);
+
         this.fetchBoards(res.parent);
       },
       (error) => {
@@ -67,29 +70,20 @@ export class BoardService extends ApiService<Board> {
 
   deleteBoard(brdId: ObjectId) {
     this.delete(brdId)
-      // .pipe(
-      //   mergeMap(() => {
-      //     // Remove the deleted workspace from the workspaces array
-      //     this.boards = this.boards.filter((brd) => brd._id !== brdId);
-
-      //     if (this.boards.length > 0) {
-      //       this.isWorkspaceEmpty = true;
-      //     }
-      //     // TODO: delte child notes
-      //     // const deleteUrl = `${this.url}/boards?parent=${wspId}`;
-      //     // return this.deleteByParent(deleteUrl);
-      //     return;
-      //   })
-      // )
-      .subscribe(
-        () => {
-          // Remove the deleted workspace from the workspaces array
+      .pipe(
+        mergeMap(() => {
           this.boards = this.boards.filter((brd) => brd._id !== brdId);
 
           if (this.boards.length > 0) {
             this.isWorkspaceEmpty = true;
           }
-          // Success callback if the deleteByParent request is successful
+
+          const deleteUrl = `${this.url}/notes?parent=${brdId}`;
+          return this.deleteByParent(deleteUrl);
+        })
+      )
+      .subscribe(
+        () => {
           console.log('Delete operation completed successfully.');
         },
         (error) => {
@@ -100,5 +94,7 @@ export class BoardService extends ApiService<Board> {
 
   clearCache() {
     this.boards = [];
+
+    this.noteSvc.clearCache();
   }
 }

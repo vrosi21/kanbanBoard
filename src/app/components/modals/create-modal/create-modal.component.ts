@@ -1,61 +1,58 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ObjectId } from 'mongodb';
 import { BoardService } from 'src/app/services/board.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { NoteService } from 'src/app/services/note.service';
-import { WorkspaceService } from 'src/app/services/workspace.service';
 
 @Component({
-  selector: 'app-edit-modal',
-  templateUrl: './edit-modal.component.html',
-  styleUrls: ['./edit-modal.component.scss'],
+  selector: 'app-create-modal',
+  templateUrl: './create-modal.component.html',
+  styleUrls: ['./create-modal.component.scss'],
 })
-export class EditModalComponent {
-  newTitle: string = this.modalSvc.objectTitle;
-  description: string = this.modalSvc.objectDescription;
-  color: string = this.modalSvc.objectColor || '';
+export class CreateModalComponent {
+  newTitle: string = '';
+  description: string = '';
+  color: string = '';
   inputEmptyErr: boolean = false;
   noColorErr: boolean = false;
+  @Input() currentWorkspaceId?: ObjectId;
 
   constructor(
-    private workspaceSvc: WorkspaceService,
     private boardSvc: BoardService,
     private noteSvc: NoteService,
     public modalSvc: ModalService
   ) {}
 
   close() {
-    this.modalSvc.isOpenEdtMdl = false;
+    this.modalSvc.isOpenCreateMdl = false;
   }
 
-  edit() {
+  createNew() {
     if (this.newTitle == '') {
       this.inputEmptyErr = true;
+      if (this.color == '') {
+        this.noColorErr = true;
+      }
       return;
-    }
-    if (this.modalSvc.objectType == 'workspace') {
-      this.workspaceSvc.renameWorkspace(this.modalSvc.objectId, this.newTitle);
-      this.close();
-      return;
-    }
-    if (this.color == '') {
+    } else if (this.color == '') {
       this.noColorErr = true;
       return;
     }
+    this.inputEmptyErr = false;
     if (this.modalSvc.objectType == 'board') {
-      this.boardSvc.renameBoard(
-        this.modalSvc.objectId,
+      this.boardSvc.createNewBoard(
         this.newTitle,
-        this.color
+        this.color,
+        this.modalSvc.parent
       );
     } else if (this.modalSvc.objectType == 'note') {
-      this.noteSvc.editNote(
-        this.modalSvc.objectId,
+      this.noteSvc.createNewNote(
         this.newTitle,
         this.description,
-        this.color
+        this.color,
+        this.modalSvc.parent
       );
     }
-
     this.close();
   }
 

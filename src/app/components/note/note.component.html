@@ -1,3 +1,29 @@
 <div class="note" [ngStyle]="{ 'background-color': note.colour }">
-	<p>{{ note.description }}</p>
+  <div class="note-header">
+    <div class="title">{{ note.title }}</div>
+    <div class="icons">
+      <fa-icon
+        [icon]="renameIcon"
+        type="rename"
+        (click)="
+          modalSvc.openEditModal(
+            note._id!,
+            note.title,
+            'note',
+            note.colour,
+            note.description
+          )
+        "
+      ></fa-icon>
+      <fa-icon
+        [icon]="trashIcon"
+        type="delete"
+        (click)="modalSvc.openDeleteModal(note._id!, note.title, 'note')"
+      ></fa-icon>
+    </div>
+  </div>
+
+  <div class="separator" *ngIf="note.description"></div>
+
+  <p>{{ note.description }}</p>
 </div>

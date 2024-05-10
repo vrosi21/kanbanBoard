@@ -36,6 +36,7 @@ export class SidebarComponent implements OnInit {
   }
 
   async ngOnInit() {
+    await this.workspaceSvc.fetchWorkspaces();
     this.workspaceSvc.newWorkspaceAdded.subscribe(
       async (currWspId: ObjectId) => {
         await this.workspaceSvc.fetchWorkspaces();
@@ -43,6 +44,5 @@ export class SidebarComponent implements OnInit {
       }
     );
     this.newWorkspaceTitle = '';
-    await this.workspaceSvc.fetchWorkspaces();
   }
 }

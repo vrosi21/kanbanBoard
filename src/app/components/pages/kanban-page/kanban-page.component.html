@@ -5,8 +5,13 @@
       *ngFor="let board of boardSvc.boards || []"
       [board]="board"
     ></app-board>
-    <div class="add-board" (click)="modalSvc.openNewBoardModal()">
-      <span class="plus">+</span>
+    <div
+      class="add-board"
+      (click)="
+        modalSvc.openCreateModal('board', workspaceSvc.currentWorkspaceId)
+      "
+    >
+      <fa-icon [icon]="addIcon" type="add"></fa-icon>
     </div>
   </div>
   <div *ngIf="workspaceSvc.isTableEmpty" class="createNewWsp">
@@ -20,7 +25,9 @@
   <div class="errMsg">Please login/ sign up to use the tool!</div>
 </div>
 
-<app-new-board-modal
-  *ngIf="modalSvc.isOpenNewBrdMdl"
+<app-create-modal
+  *ngIf="modalSvc.isOpenCreateMdl"
   [currentWorkspaceId]="workspaceSvc.currentWorkspaceId"
-></app-new-board-modal>
+></app-create-modal>
+<app-edit-modal *ngIf="modalSvc.isOpenEdtMdl"></app-edit-modal>
+<app-delete-modal *ngIf="modalSvc.isOpenDltMdl"></app-delete-modal>

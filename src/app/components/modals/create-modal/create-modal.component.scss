@@ -21,6 +21,24 @@
   .wspTitle {
     color: $minty;
   }
+  .desc {
+    textarea[name="description"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 5px;
+      box-sizing: border-box;
+      border: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s;
+      resize: none; /* Disables textarea resizing */
+      background-color: transparent; /* Makes textarea transparent */
+      outline: none; /* Removes default browser focus outline */
+    }
+
+    textarea[name="description"]:focus {
+      border-bottom-color: $minty; /* Changes bottom border color when focused */
+    }
+  }
 }
 
 .modalBackground {
