@@ -104,7 +104,7 @@ export class WorkspaceService extends ApiService<Workspace> {
     }
   }
 
-  changeWorkspace(wspId: ObjectId): Workspace | undefined {
+  changeWorkspace(wspId?: ObjectId): Workspace | undefined {
     const foundWorkspace = this.workspaces.find((wsp) => wsp._id === wspId);
     if (foundWorkspace) {
       this.currentWorkspace = foundWorkspace;

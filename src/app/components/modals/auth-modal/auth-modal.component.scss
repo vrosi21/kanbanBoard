@@ -20,7 +20,11 @@
   background-color: $ltGray;
   margin-top: 192px;
   max-width: 360px;
-  text-align: center; // Center elements horizontally
+  text-align: center;
+  h2 {
+    color: $matt;
+    font-weight: bold;
+  }
 }
 
 .modalHeader {

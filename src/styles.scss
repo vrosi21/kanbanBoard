@@ -13,7 +13,7 @@ $gold: #ffd700;
 $gold-tinted: #756401;
 
 .title {
-  word-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 .link {

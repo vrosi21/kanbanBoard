@@ -6,8 +6,11 @@
   width: 220px;
   background-color: $ltGray;
   height: 100%;
-  overflow: auto;
-  position: relative;
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Enable horizontal scrolling */
+  position: fixed; /* Keep sidebar fixed */
+  top: 64px; /* Position from top */
+  left: 0; /* Position from left */
 
   a {
     cursor: pointer;

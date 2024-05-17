@@ -7,19 +7,15 @@ export class ApiService<T> {
   protected url = 'http://localhost:3000';
   protected constructor(protected http: HttpClient, protected path: string) {}
 
-  protected handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred:', error.error.message);
-    } else {
+  protected handleError(error: any): Observable<any> {
+    if (error instanceof HttpErrorResponse) {
       console.error(
         `Backend returned code ${error.status}, ` +
-          `body was: ${JSON.stringify(error.error)}`
+          `${error.error.name}: ${error.error.message}`
       );
-      if (error.error && error.error.error) {
-        return throwError(error.error.error);
-      }
+    } else {
+      console.error('An unexpected error occurred:', error);
     }
-    // If there's no specific error message in the response body, return a generic error message
     return throwError('Something bad happened; please try again later.');
   }
 

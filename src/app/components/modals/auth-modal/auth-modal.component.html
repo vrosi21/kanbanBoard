@@ -4,6 +4,7 @@
       <fa-icon [icon]="faTimes" (click)="close()"></fa-icon>
     </div>
     <form *ngIf="modalSvc.isLoginMode; else registerForm" (submit)="onLogin()">
+      <h2>Log in</h2>
       <input
         type="email"
         placeholder="Email"
@@ -23,6 +24,7 @@
       </p>
     </form>
     <ng-template #registerForm>
+      <h2>Sign up</h2>
       <form (submit)="onRegister()">
         <input
           type="text"

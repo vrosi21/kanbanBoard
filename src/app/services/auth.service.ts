@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { LoginData, UserData } from '../models/user.model';
 import { WorkspaceService } from './workspace.service';
+import { ApiService } from './api.service';
 interface AuthResponse {
   token: string;
 }
@@ -11,12 +12,11 @@ interface AuthResponse {
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService extends ApiService<UserData> {
   authUrl: string = 'http://localhost:3000/auth';
-  constructor(
-    private http: HttpClient,
-    private workspaceSvc: WorkspaceService
-  ) {}
+  constructor(http: HttpClient, private workspaceSvc: WorkspaceService) {
+    super(http, '/users/');
+  }
 
   get token() {
     return localStorage.getItem('token');
@@ -45,7 +45,7 @@ export class AuthService {
       .post<AuthResponse>(this.authUrl + '/register', registerData)
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          console.error('Error occurred:', error);
+          this.handleError(error);
           return throwError('An error occurred while processing your request.');
         })
       );

@@ -6,32 +6,39 @@
   display: flex;
   flex-direction: row;
   height: 100vh;
-  width: 100%; /* Add this line */
+  width: calc(100% - 220px); /* Adjusted width */
+  margin-left: 220px; /* Move content to the right */
+  .kanban {
+    overflow-y: auto;
+    app-board {
+      height: calc(100vh - 128px);
+    }
+  }
 }
 .home {
-  width: 100%;
+  width: fit-content;
+  padding-right: 20px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
   margin-top: 30px;
-  flex-wrap: wrap;
 }
 .add-board {
-  width: 200px;
+  height: calc(100vh - 128px);
   padding: 20px;
   border-radius: 10px;
-  margin: 20px;
+  margin-left: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  height: 48px;
   background-color: $midGray;
   cursor: pointer;
   fa-icon {
     color: $ltGray;
+    font-size: 24px;
   }
 }
 .add-board:hover {

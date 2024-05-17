@@ -43,6 +43,7 @@ export class SidebarComponent implements OnInit {
         this.workspaceSvc.changeWorkspace(currWspId);
       }
     );
+    this.workspaceSvc.changeWorkspace(this.workspaceSvc.currentWorkspaceId);
     this.newWorkspaceTitle = '';
   }
 }

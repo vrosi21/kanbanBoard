@@ -36,9 +36,10 @@
     color: $error;
   }
 
-  p {
-    font-size: 14px; /* Set description font size */
-    color: $matt; /* Set description text color */
+  .desc {
+    font-size: 14px;
+    color: $matt;
+    overflow-wrap: anywhere;
   }
   .separator {
     border-top: 1px solid $matt;

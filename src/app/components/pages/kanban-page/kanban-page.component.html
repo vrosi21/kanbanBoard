@@ -1,23 +1,25 @@
 <div *ngIf="authSvc.isAuthenticated" class="mainContainer">
   <app-sidebar></app-sidebar>
-  <div *ngIf="!workspaceSvc.isTableEmpty" class="home">
-    <app-board
-      *ngFor="let board of boardSvc.boards || []"
-      [board]="board"
-    ></app-board>
-    <div
-      class="add-board"
-      (click)="
-        modalSvc.openCreateModal('board', workspaceSvc.currentWorkspaceId)
-      "
-    >
-      <fa-icon [icon]="addIcon" type="add"></fa-icon>
+  <div class="kanban">
+    <div *ngIf="!workspaceSvc.isTableEmpty" class="home">
+      <app-board
+        *ngFor="let board of boardSvc.boards || []"
+        [board]="board"
+      ></app-board>
+      <div
+        class="add-board"
+        (click)="
+          modalSvc.openCreateModal('board', workspaceSvc.currentWorkspaceId)
+        "
+      >
+        <fa-icon [icon]="addIcon" type="add"></fa-icon>
+      </div>
     </div>
-  </div>
-  <div *ngIf="workspaceSvc.isTableEmpty" class="createNewWsp">
-    <div class="makeNewMsg">
-      <fa-icon [icon]="faArrowLeft"></fa-icon>
-      Get started by creating a new workspace in the sidebar!
+    <div *ngIf="workspaceSvc.isTableEmpty" class="createNewWsp">
+      <div class="makeNewMsg">
+        <fa-icon [icon]="faArrowLeft"></fa-icon>
+        Get started by creating a new workspace in the sidebar!
+      </div>
     </div>
   </div>
 </div>
